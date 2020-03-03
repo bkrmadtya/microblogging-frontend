@@ -1,5 +1,6 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   Button,
   Form,
@@ -8,32 +9,49 @@ import {
   Message,
   Segment,
   Icon
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
+
+import { signup } from "../../store/actions/authActions";
 
 const styles = {
-  color: 'blue',
+  color: "blue",
 
   buttonLink: {
-    color: 'blue',
-    background: 'none',
+    color: "blue",
+    background: "none",
     padding: 0,
     fontWeight: 100
   }
 };
 
-const SignupPage = () => {
+const SignupPage = ({ auth, signup }) => {
   const history = useHistory();
 
   const navigateTo = path => {
     history.push(path);
   };
 
+  useEffect(() => {
+    if (auth.user) {
+      navigateTo("/wall");
+    }
+  });
+
   const handleSubmit = e => {
     e.preventDefault();
+    const { username, email, password } = e.target;
+
+    const user = {
+      username: username.value,
+      email: email.value,
+      password: password.value
+    };
+
+    signup(user);
   };
 
   return (
-    <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 500 }}>
         <Header color={styles.color} content="Microblogging" as="h1" />
         <Header color={styles.color} icon>
@@ -48,6 +66,7 @@ const SignupPage = () => {
           <Segment basic>
             <Form.Input
               fluid
+              name="username"
               icon="user"
               iconPosition="left"
               placeholder="Your username"
@@ -55,6 +74,7 @@ const SignupPage = () => {
             />
             <Form.Input
               fluid
+              name="email"
               icon="at"
               iconPosition="left"
               placeholder="E-mail address"
@@ -62,6 +82,7 @@ const SignupPage = () => {
             />
             <Form.Input
               fluid
+              name="password"
               icon="lock"
               iconPosition="left"
               placeholder="Password"
@@ -74,10 +95,10 @@ const SignupPage = () => {
             </Button>
 
             <Message>
-              Already registered?{' '}
+              Already registered?{" "}
               <Button
                 style={styles.buttonLink}
-                onClick={() => navigateTo('/login')}
+                onClick={() => navigateTo("/login")}
               >
                 Log In
               </Button>
@@ -89,4 +110,10 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps, { signup })(SignupPage);

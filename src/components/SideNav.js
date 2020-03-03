@@ -1,17 +1,42 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Label, Input, Menu, Dropdown, Container } from 'semantic-ui-react';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { Label, Input, Menu } from "semantic-ui-react";
 
-const SideNav = props => {
+const SideNav = ({ user }) => {
   const history = useHistory();
 
   const navigateTo = path => {
     history.push(path);
   };
 
+  console.log("[SIDE_NAV] : ", user);
+
   return (
     <>
-      <Menu size="small" vertical borderless>
+      <Menu fluid inverted color="teal" size="small" vertical>
+        <Menu.Item as="h4" style={{ margin: 0 }}>
+          Welcome, <strong>{user.username}</strong>!
+        </Menu.Item>
+
+        <Menu.Item>
+          <Input icon="search" placeholder="Search anything..." />
+        </Menu.Item>
+
+        <Menu.Item name="inbox">
+          <Label color="teal">1</Label>
+          Inbox
+        </Menu.Item>
+
+        <Menu.Item name="sent">
+          <Label color="red">51</Label>
+          Sent
+        </Menu.Item>
+
+        <Menu.Item name="updates">
+          <Label>1</Label>
+          Updates
+        </Menu.Item>
+
         <Menu.Item name="inbox">
           <Label color="teal">1</Label>
           Inbox
@@ -26,8 +51,20 @@ const SideNav = props => {
           <Label>1</Label>
           Updates
         </Menu.Item>
-        <Menu.Item>
-          <Input icon="search" placeholder="Search mail..." />
+
+        <Menu.Item name="inbox">
+          <Label color="teal">1</Label>
+          Inbox
+        </Menu.Item>
+
+        <Menu.Item name="spam">
+          <Label>51</Label>
+          Spam
+        </Menu.Item>
+
+        <Menu.Item name="updates">
+          <Label>1</Label>
+          Updates
         </Menu.Item>
       </Menu>
     </>

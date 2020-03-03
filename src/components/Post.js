@@ -1,14 +1,17 @@
-import React from 'react';
-import { Card, Image, Button, Icon } from 'semantic-ui-react';
+import React from "react";
+import { Card, Image, Button, Icon } from "semantic-ui-react";
 
 const styles = {
+  card: {
+    borderColor: "blue"
+  },
   button: {
-    background: 'none'
+    background: "none"
   }
 };
 
 const Post = () => {
-  const images = ['molly.png', 'steve.jpg', 'jenny.jpg', 'matthew.png'];
+  const images = ["molly.png", "steve.jpg", "jenny.jpg", "matthew.png"];
 
   const randomIndex = () => {
     return Math.round(Math.random() * 3);
@@ -19,7 +22,7 @@ const Post = () => {
   }`;
 
   return (
-    <Card fluid>
+    <Card fluid style={styles.card} link>
       <Card.Content>
         <Image circular bordered floated="left" size="mini" src={imageSrc} />
         <Card.Header>Steve Sanders</Card.Header>

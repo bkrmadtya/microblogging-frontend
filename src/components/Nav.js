@@ -1,8 +1,11 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Icon, Input, Menu, Dropdown, Container } from 'semantic-ui-react';
+import React from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Icon, Input, Menu, Dropdown, Container } from "semantic-ui-react";
 
-const Nav = props => {
+import { logout } from "../store/actions/authActions";
+
+const Nav = ({ children, logout }) => {
   const history = useHistory();
 
   const navigateTo = path => {
@@ -13,11 +16,16 @@ const Nav = props => {
     <>
       <Menu size="large" fixed="top" fluid borderless>
         <Container>
-          <Menu.Item onClick={() => navigateTo('/login')}>
+          <Menu.Item
+            onClick={() => {
+              logout();
+              navigateTo("/login");
+            }}
+          >
             <Icon name="twitter" color="blue" />
             Microblogging
           </Menu.Item>
-          {props.children}
+          {children}
           <Menu.Item>
             <Input icon="search" placeholder="Search people, posts, tags..." />
           </Menu.Item>
@@ -25,13 +33,28 @@ const Nav = props => {
           <Menu.Menu position="right">
             <Dropdown direction="left" icon="user" floating item>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={() => navigateTo('/login')}>
+                <Dropdown.Item
+                  onClick={() => {
+                    logout();
+                    navigateTo("/login");
+                  }}
+                >
                   User profile
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => navigateTo('/login')}>
+                <Dropdown.Item
+                  onClick={() => {
+                    logout();
+                    navigateTo("/login");
+                  }}
+                >
                   Setting
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => navigateTo('/login')}>
+                <Dropdown.Item
+                  onClick={() => {
+                    logout();
+                    navigateTo("/login");
+                  }}
+                >
                   Logout
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -43,4 +66,4 @@ const Nav = props => {
   );
 };
 
-export default Nav;
+export default connect(null, { logout })(Nav);

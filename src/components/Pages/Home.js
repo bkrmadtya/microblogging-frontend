@@ -1,37 +1,140 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useRef } from "react";
+import { useHistory } from "react-router-dom";
+import { Menu, Sticky, Input, Segment, Container } from "semantic-ui-react";
 
-import Nav from '../Nav';
-import { Menu } from 'semantic-ui-react';
-
-const styles = {
-  color: 'blue',
-  buttonLink: {
-    color: 'blue',
-    background: 'none',
-    padding: 0,
-    fontWeight: 100
-  }
-};
+import Nav from "../Nav";
 
 const Home = () => {
   const history = useHistory();
+  const contextRef = useRef();
 
   const navigateTo = path => {
     history.push(path);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
-
   return (
     <>
-      <Nav>
-        <Menu.Item name="home" onClick={() => navigateTo('/login')} />
-        <Menu.Item name="messages" onClick={() => navigateTo('/login')} />
-        <Menu.Item name="friends" onClick={() => navigateTo('/login')} />
-      </Nav>
+      <div ref={contextRef}>
+        <Sticky context={contextRef}>
+          <Nav>
+            <Menu.Item name="home" onClick={() => navigateTo("/login")} />
+            <Menu.Item name="messages" onClick={() => navigateTo("/login")} />
+            <Menu.Item name="friends" onClick={() => navigateTo("/login")} />
+          </Nav>
+        </Sticky>
+
+        <Container attached="bottom">
+          <Segment>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Consequatur inventore, et excepturi dignissimos voluptatibus odio
+            quos, iste natus saepe velit soluta accusantium sint est? Facere
+            sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
+            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+            inventore, et excepturi dignissimos voluptatibus odio quos, iste
+            natus saepe velit soluta accusantium sint est? Facere sint non odio
+            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
+            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
+            odio quos, iste natus saepe velit soluta accusantium sint est?
+            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Consequatur inventore, et excepturi
+            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
+            accusantium sint est? Facere sint non odio temporibus cum!
+          </Segment>
+        </Container>
+      </div>
     </>
   );
 };
