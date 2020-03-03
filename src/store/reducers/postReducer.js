@@ -1,24 +1,17 @@
 import { ADD_POST } from "../actions/actionTypes";
 
-const initialPosts = [
-  {
-    id: 1,
-    content: "A new post",
-    user: {
-      id: 1,
-      username: "bikram"
-    },
-    likes: 55,
-    comments: 55,
-    shares: 55
-  }
-];
+import PostServices from "../../services/PostServices";
 
-export const postReducer = (state = initialPosts, { type, payload }) => {
+const initialPosts = PostServices.getAllPosts();
+
+const postReducer = (state = initialPosts, { type, payload }) => {
   switch (type) {
     case ADD_POST:
-      return state.concat(payload);
+      console.log("[NEW POST] : ", payload);
+      return [payload, ...state];
     default:
       return state;
   }
 };
+
+export default postReducer;

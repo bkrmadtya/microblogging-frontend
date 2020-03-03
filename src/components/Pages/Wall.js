@@ -13,6 +13,7 @@ import {
 
 import Nav from "../Nav";
 import Post from "../Post";
+import NewPostForm from "../NewPostForm";
 
 const SideNav = React.lazy(() => import("../SideNav"));
 
@@ -22,9 +23,17 @@ const styles = {
   }
 };
 
-const Wall = ({ auth }) => {
+const Wall = ({ auth, posts }) => {
   const history = useHistory();
   const contextRef = useRef();
+
+  console.log(posts);
+
+  auth = {
+    user: {
+      username: "Bikram"
+    }
+  };
 
   useEffect(() => {
     console.log("[WALL AUTH] : ", !auth.user);
@@ -54,18 +63,14 @@ const Wall = ({ auth }) => {
                 <SideNav user={auth.user} />
               </Suspense>
             </Grid.Column>
-            <Grid.Column width={12} stretched>
+            <Grid.Column width={12}>
+              <Header>Add a new post</Header>
+              <NewPostForm />
+
               <Header>Recent posts</Header>
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
+              {posts.map(post => (
+                <Post post={post} />
+              ))}
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -76,7 +81,8 @@ const Wall = ({ auth }) => {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    posts: state.posts
   };
 };
 

@@ -10,39 +10,36 @@ const styles = {
   }
 };
 
-const Post = () => {
-  const images = ["molly.png", "steve.jpg", "jenny.jpg", "matthew.png"];
+const Post = ({ post }) => {
+  const imageSrc = (() => {
+    const images = ["molly.png", "steve.jpg", "jenny.jpg", "matthew.png"];
 
-  const randomIndex = () => {
-    return Math.round(Math.random() * 3);
-  };
+    const randomIndex = () => {
+      return Math.round(Math.random() * 3);
+    };
 
-  const imageSrc = `https://react.semantic-ui.com/images/avatar/large/${
-    images[randomIndex()]
-  }`;
+    return `https://react.semantic-ui.com/images/avatar/large/${
+      images[randomIndex()]
+    }`;
+  })();
 
   return (
-    <Card fluid style={styles.card} link>
+    <Card fluid style={styles.card}>
       <Card.Content>
         <Image circular bordered floated="left" size="mini" src={imageSrc} />
-        <Card.Header>Steve Sanders</Card.Header>
-        <Card.Meta>Feb 29 2020 at 15:06</Card.Meta>
-        <Card.Description>
-          The life is beautiful Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Nulla, quis quo consectetur at quia soluta nesciunt
-          facilis earum. Quidem dolores cumque minus, facilis quod minima.
-          Praesentium veritatis blanditiis tenetur totam!
-        </Card.Description>
+        <Card.Header>{post.username}</Card.Header>
+        <Card.Meta>{post.creationDate}</Card.Meta>
+        <Card.Description>{post.content}</Card.Description>
       </Card.Content>
-      <Card.Content>
+      <Card.Content style={{ padding: 0 }}>
         <Button style={styles.button}>
-          <Icon name="heart outline" color="red" /> 3005
+          <Icon name="heart outline" color="red" /> {post.likes}
         </Button>
         <Button style={styles.button}>
-          <Icon name="share square outline" color="blue" /> 215
+          <Icon name="share square outline" color="blue" /> {post.shares}
         </Button>
         <Button floated="right" style={styles.button}>
-          <Icon name="comment outline" color="blue" /> 215
+          <Icon name="comment outline" color="blue" /> {post.comments}
         </Button>
       </Card.Content>
     </Card>
