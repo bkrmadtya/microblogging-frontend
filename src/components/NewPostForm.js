@@ -25,6 +25,8 @@ const NewPostForm = ({ addPost }) => {
     };
 
     addPost(newPost);
+
+    setContent("");
   };
 
   return (
@@ -33,23 +35,24 @@ const NewPostForm = ({ addPost }) => {
         <Image circular bordered floated="left" size="mini" src={imageSrc} />
         <Card.Header>Steve Sanders</Card.Header>
         <Card.Description>
-          <Form onSubmit={handleAddPost}>
+          <Form size="tiny" onSubmit={handleAddPost}>
             <Form.Field
               control={TextArea}
+              value={content}
               placeholder="What's your thought today?"
               rows={1}
               onChange={({ target }) => setContent(target.value)}
             />
 
-            <Button
-              type="submit"
-              floated="right"
+            <Form.Button
+              content="Add Reply"
+              size="tiny"
+              labelPosition="right"
+              icon="twitter"
               primary
-              basic
+              floated="right"
               disabled={!content}
-            >
-              Post
-            </Button>
+            />
           </Form>
         </Card.Description>
       </Card.Content>

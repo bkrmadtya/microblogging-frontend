@@ -13,7 +13,7 @@ const SideNav = ({ user }) => {
 
   return (
     <>
-      <Menu fluid inverted color="teal" size="small" vertical>
+      <Menu fluid inverted color="blue" size="small" vertical>
         <Menu.Item as="h4" style={{ margin: 0 }}>
           Welcome, <strong>{user.username}</strong>!
         </Menu.Item>
@@ -33,7 +33,7 @@ const SideNav = ({ user }) => {
         </Menu.Item>
 
         <Menu.Item name="updates">
-          <Label>1</Label>
+          <Label color="teal">1</Label>
           Updates
         </Menu.Item>
 
@@ -43,28 +43,8 @@ const SideNav = ({ user }) => {
         </Menu.Item>
 
         <Menu.Item name="spam">
-          <Label>51</Label>
+          <Label color="teal">51</Label>
           Spam
-        </Menu.Item>
-
-        <Menu.Item name="updates">
-          <Label>1</Label>
-          Updates
-        </Menu.Item>
-
-        <Menu.Item name="inbox">
-          <Label color="teal">1</Label>
-          Inbox
-        </Menu.Item>
-
-        <Menu.Item name="spam">
-          <Label>51</Label>
-          Spam
-        </Menu.Item>
-
-        <Menu.Item name="updates">
-          <Label>1</Label>
-          Updates
         </Menu.Item>
       </Menu>
     </>

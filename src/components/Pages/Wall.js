@@ -56,7 +56,7 @@ const Wall = ({ auth, posts }) => {
       <Nav />
 
       <Container style={styles.container}>
-        <Grid columns={2} stackable>
+        <Grid columns={2} stackable divided>
           <Grid.Row>
             <Grid.Column width={4}>
               <Suspense fallback="loading">
