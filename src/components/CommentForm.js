@@ -8,12 +8,8 @@ import {
   Divider
 } from "semantic-ui-react";
 
-const CommentForm = () => (
-  <Comment.Group style={{ margin: "auto", maxWidth: "inherit" }}>
-    <Header as="h4" dividing>
-      Comments
-    </Header>
-
+const CommentForm = ({ imageSrc }) => (
+  <Comment.Group style={{ margin: "auto", maxWidth: "inherit" }} threaded>
     <Form>
       <Form.TextArea />
       <Form.Button
@@ -25,8 +21,10 @@ const CommentForm = () => (
       />
     </Form>
 
+    <Header as="h4">Recent comments</Header>
+
     <Comment>
-      <Comment.Avatar src="/images/avatar/small/matt.jpg" />
+      <Comment.Avatar circular src={imageSrc} />
       <Comment.Content>
         <Comment.Author as="a">Matt</Comment.Author>
         <Comment.Metadata>
@@ -40,7 +38,7 @@ const CommentForm = () => (
     </Comment>
 
     <Comment>
-      <Comment.Avatar src="/images/avatar/small/elliot.jpg" />
+      <Comment.Avatar circular src={imageSrc} />
       <Comment.Content>
         <Comment.Author as="a">Elliot Fu</Comment.Author>
         <Comment.Metadata>
@@ -55,7 +53,7 @@ const CommentForm = () => (
       </Comment.Content>
       <Comment.Group>
         <Comment>
-          <Comment.Avatar src="/images/avatar/small/jenny.jpg" />
+          <Comment.Avatar circular src={imageSrc} />
           <Comment.Content>
             <Comment.Author as="a">Jenny Hess</Comment.Author>
             <Comment.Metadata>
@@ -71,7 +69,7 @@ const CommentForm = () => (
     </Comment>
 
     <Comment>
-      <Comment.Avatar src="/images/avatar/small/joe.jpg" />
+      <Comment.Avatar circular src={imageSrc} />
       <Comment.Content>
         <Comment.Author as="a">Joe Henderson</Comment.Author>
         <Comment.Metadata>
