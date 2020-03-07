@@ -9,7 +9,9 @@ import {
 } from "../actions/actionTypes";
 
 const initialState = {
-  user: null,
+  user: {
+    username: "Bikram"
+  },
   loading: false,
   error: null
 };

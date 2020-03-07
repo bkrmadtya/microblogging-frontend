@@ -1,21 +1,12 @@
-import React, { useEffect, useRef, Suspense } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {
-  Container,
-  Segment,
-  Grid,
-  Input,
-  Header,
-  Menu,
-  Sticky
-} from 'semantic-ui-react';
+import { Container, Grid, Header } from 'semantic-ui-react';
 
 import Nav from '../Nav';
 import Post from '../Post';
 import NewPostForm from '../NewPostForm';
-
-const SideNav = React.lazy(() => import('../SideNav'));
+import SideNav from '../SideNav';
 
 const styles = {
   container: {
@@ -23,32 +14,17 @@ const styles = {
   }
 };
 
-const Wall = ({ auth, posts }) => {
+const Wall = ({ user, posts }) => {
   const history = useHistory();
-  const contextRef = useRef();
-
-  console.log(posts);
-
-  auth = {
-    user: {
-      username: 'Bikram'
-    }
-  };
 
   useEffect(() => {
-    console.log('[WALL AUTH] : ', !auth.user);
-    if (!auth.user) {
-      console.log(true);
+    if (!user) {
       navigateTo('/login');
     }
   });
 
   const navigateTo = path => {
     history.push(path);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
   };
 
   return (
@@ -60,22 +36,17 @@ const Wall = ({ auth, posts }) => {
           <Grid.Row>
             <Grid.Column width={4}>
               <Suspense fallback="loading">
-                <SideNav user={auth.user} />
+                <SideNav user={user} />
               </Suspense>
             </Grid.Column>
             <Grid.Column width={12}>
               <Header>Add a new post</Header>
-              <NewPostForm />
+
+              <NewPostForm user={user} />
 
               <Header>Recent posts</Header>
               {posts.map(post => (
-                <>
-                  <Post post={post} />
-                  <Post post={post} />
-                  <Post post={post} />
-                  <Post post={post} />
-                  <Post post={post} />
-                </>
+                <Post key={post.id} post={post} />
               ))}
             </Grid.Column>
           </Grid.Row>
@@ -87,7 +58,7 @@ const Wall = ({ auth, posts }) => {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth,
+    user: state.auth.user,
     posts: state.posts
   };
 };

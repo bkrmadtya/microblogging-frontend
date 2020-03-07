@@ -1,87 +1,47 @@
-import React from "react";
-import {
-  Button,
-  Comment,
-  Form,
-  Header,
-  Container,
-  Divider
-} from "semantic-ui-react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Form, Header } from "semantic-ui-react";
 
-const CommentForm = ({ imageSrc }) => (
-  <Comment.Group style={{ margin: "auto", maxWidth: "inherit" }} threaded>
-    <Form>
-      <Form.TextArea />
+import { addComment } from "../store/actions/commentActions";
+
+const CommentForm = ({ user, addComment, post }) => {
+  const [content, setContent] = useState("");
+
+  const handleAddComment = () => {
+    const newComment = {
+      content,
+      owner: user,
+      postId: post.id
+    };
+    addComment(newComment);
+    setContent("");
+  };
+
+  return (
+    <Form onSubmit={handleAddComment}>
+      <Header as="h5">Add a comment</Header>
+      <Form.TextArea
+        value={content}
+        onChange={({ target }) => {
+          setContent(target.value);
+        }}
+      />
       <Form.Button
-        content="Add Reply"
-        size="tiny"
+        content="Comment"
+        size="mini"
         labelPosition="right"
         icon="twitter"
         primary
+        disabled={!content.trim().length}
       />
     </Form>
+  );
+};
 
-    <Header as="h4">Recent comments</Header>
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
 
-    <Comment>
-      <Comment.Avatar circular src={imageSrc} />
-      <Comment.Content>
-        <Comment.Author as="a">Matt</Comment.Author>
-        <Comment.Metadata>
-          <div>Today at 5:42PM</div>
-        </Comment.Metadata>
-        <Comment.Text>How artistic!</Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-    </Comment>
-
-    <Comment>
-      <Comment.Avatar circular src={imageSrc} />
-      <Comment.Content>
-        <Comment.Author as="a">Elliot Fu</Comment.Author>
-        <Comment.Metadata>
-          <div>Yesterday at 12:30AM</div>
-        </Comment.Metadata>
-        <Comment.Text>
-          <p>This has been very useful for my research. Thanks as well!</p>
-        </Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-      <Comment.Group>
-        <Comment>
-          <Comment.Avatar circular src={imageSrc} />
-          <Comment.Content>
-            <Comment.Author as="a">Jenny Hess</Comment.Author>
-            <Comment.Metadata>
-              <div>Just now</div>
-            </Comment.Metadata>
-            <Comment.Text>Elliot you are always so right :)</Comment.Text>
-            <Comment.Actions>
-              <Comment.Action>Reply</Comment.Action>
-            </Comment.Actions>
-          </Comment.Content>
-        </Comment>
-      </Comment.Group>
-    </Comment>
-
-    <Comment>
-      <Comment.Avatar circular src={imageSrc} />
-      <Comment.Content>
-        <Comment.Author as="a">Joe Henderson</Comment.Author>
-        <Comment.Metadata>
-          <div>5 days ago</div>
-        </Comment.Metadata>
-        <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-    </Comment>
-  </Comment.Group>
-);
-
-export default CommentForm;
+export default connect(mapStateToProps, { addComment })(CommentForm);
