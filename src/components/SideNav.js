@@ -9,8 +9,6 @@ const SideNav = ({ user }) => {
     history.push(path);
   };
 
-  console.log("[SIDE_NAV] : ", user);
-
   return (
     <>
       <Menu fluid inverted color="blue" size="small" vertical>

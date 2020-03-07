@@ -12,3 +12,8 @@ export const SET_ERROR = "SET_ERROR";
 export const RESET_ERROR = "RESET_ERROR";
 
 export const ADD_POST = "ADD_POST";
+export const COMMENT_POST = "COMMENT_POST";
+export const UPDATE_POST = "UPDATE_POST";
+
+export const GET_COMMENT = "GET_COMMENT";
+export const ADD_COMMENT = "ADD_COMMENT";

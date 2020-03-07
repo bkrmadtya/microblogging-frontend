@@ -4,7 +4,7 @@ import { Card, Image, Button, TextArea, Form } from "semantic-ui-react";
 
 import { addPost } from "../store/actions/postActions";
 
-const NewPostForm = ({ addPost }) => {
+const NewPostForm = ({ user, addPost }) => {
   const [content, setContent] = useState();
 
   const imageSrc = (() => {
@@ -21,7 +21,8 @@ const NewPostForm = ({ addPost }) => {
 
   const handleAddPost = () => {
     const newPost = {
-      content: content
+      content: content,
+      username: user.username
     };
 
     addPost(newPost);
@@ -33,7 +34,7 @@ const NewPostForm = ({ addPost }) => {
     <Card fluid style={styles.card}>
       <Card.Content>
         <Image circular bordered floated="left" size="mini" src={imageSrc} />
-        <Card.Header>Steve Sanders</Card.Header>
+        <Card.Header>{user.username}</Card.Header>
         <Card.Description>
           <Form size="tiny" onSubmit={handleAddPost}>
             <Form.Field
@@ -45,8 +46,8 @@ const NewPostForm = ({ addPost }) => {
             />
 
             <Form.Button
-              content="Add Reply"
-              size="tiny"
+              content="Post"
+              size="mini"
               labelPosition="right"
               icon="twitter"
               primary
