@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, Suspense } from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useRef, Suspense } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   Container,
   Segment,
@@ -9,17 +9,17 @@ import {
   Header,
   Menu,
   Sticky
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-import Nav from "../Nav";
-import Post from "../Post";
-import NewPostForm from "../NewPostForm";
+import Nav from '../Nav';
+import Post from '../Post';
+import NewPostForm from '../NewPostForm';
 
-const SideNav = React.lazy(() => import("../SideNav"));
+const SideNav = React.lazy(() => import('../SideNav'));
 
 const styles = {
   container: {
-    paddingTop: "70px"
+    paddingTop: '70px'
   }
 };
 
@@ -31,15 +31,15 @@ const Wall = ({ auth, posts }) => {
 
   auth = {
     user: {
-      username: "Bikram"
+      username: 'Bikram'
     }
   };
 
   useEffect(() => {
-    console.log("[WALL AUTH] : ", !auth.user);
+    console.log('[WALL AUTH] : ', !auth.user);
     if (!auth.user) {
       console.log(true);
-      navigateTo("/login");
+      navigateTo('/login');
     }
   });
 
@@ -69,7 +69,13 @@ const Wall = ({ auth, posts }) => {
 
               <Header>Recent posts</Header>
               {posts.map(post => (
-                <Post post={post} />
+                <>
+                  <Post post={post} />
+                  <Post post={post} />
+                  <Post post={post} />
+                  <Post post={post} />
+                  <Post post={post} />
+                </>
               ))}
             </Grid.Column>
           </Grid.Row>
