@@ -20,7 +20,7 @@ function App({ initPost }) {
         <Route path="/" exact component={Wall} />
         <Route path="/login" exact component={LoginPage} />
         <Route path="/signup" exact component={SignupPage} />
-        <Route path="/wall" exact component={Wall} />
+        <Route path="/user/:username" exact component={Wall} />
       </Router>
     </div>
   );

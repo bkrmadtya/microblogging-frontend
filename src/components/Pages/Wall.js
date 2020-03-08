@@ -21,10 +21,6 @@ const Wall = ({ user, posts }) => {
     }
   });
 
-  useEffect(() => {
-    console.log('Post updated', posts);
-  }, [posts]);
-
   if (!user) {
     return null;
   }

@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -9,16 +9,16 @@ import {
   Icon,
   Message,
   Segment
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-import { login } from "../../store/actions/authActions";
-import { useEffect } from "react";
+import { login } from '../../store/actions/authActions';
+import { useEffect } from 'react';
 
 const styles = {
-  color: "blue",
+  color: 'blue',
   buttonLink: {
-    color: "blue",
-    background: "none",
+    color: 'blue',
+    background: 'none',
     padding: 0,
     fontWeight: 100
   }
@@ -33,7 +33,7 @@ const LoginPage = ({ auth, login }) => {
 
   useEffect(() => {
     if (auth.user) {
-      navigateTo("/wall");
+      navigateTo(`/user/${auth.user.username}`);
     }
   });
 
@@ -45,7 +45,7 @@ const LoginPage = ({ auth, login }) => {
   };
 
   return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+    <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         {auth.error && <Message error>{auth.error}</Message>}
         <Header color={styles.color} content="Microblogging" as="h1" />
@@ -88,10 +88,10 @@ const LoginPage = ({ auth, login }) => {
             </Button>
 
             <Message>
-              New to us?{" "}
+              New to us?{' '}
               <Button
                 style={styles.buttonLink}
-                onClick={() => navigateTo("/signup")}
+                onClick={() => navigateTo('/signup')}
               >
                 Sign Up
               </Button>
