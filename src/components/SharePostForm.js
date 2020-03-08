@@ -28,7 +28,7 @@ const SharePostForm = ({
   };
 
   return (
-    <Modal open={openModal}>
+    <Modal open={openModal} onClose={() => setOpenModal(false)}>
       <Header as="h5">Share the post</Header>
       <Modal.Content>
         <Input

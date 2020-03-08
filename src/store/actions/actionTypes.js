@@ -1,3 +1,8 @@
+export const SET_NOTIFICATION = 'SET_NOTIFICATION';
+export const RESET_NOTIFICATION = 'RESET_NOTIFICATION';
+export const SUCCESS = 'success';
+export const ERROR = 'error';
+
 export const LOGIN_INIT = 'LOGIN_INIT';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
@@ -7,9 +12,6 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 
 export const LOGOUT = 'LOGOUT';
-
-export const SET_ERROR = 'SET_ERROR';
-export const RESET_ERROR = 'RESET_ERROR';
 
 export const INIT_POST = 'INIT_POST';
 export const ADD_POST = 'ADD_POST';

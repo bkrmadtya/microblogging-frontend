@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
@@ -11,18 +11,9 @@ import {
   Segment
 } from 'semantic-ui-react';
 
-import { login } from '../../store/actions/authActions';
-import { useEffect } from 'react';
+import Notification from '../Notification';
 
-const styles = {
-  color: 'blue',
-  buttonLink: {
-    color: 'blue',
-    background: 'none',
-    padding: 0,
-    fontWeight: 100
-  }
-};
+import { login } from '../../store/actions/authActions';
 
 const LoginPage = ({ auth, login }) => {
   const history = useHistory();
@@ -47,7 +38,8 @@ const LoginPage = ({ auth, login }) => {
   return (
     <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
-        {auth.error && <Message error>{auth.error}</Message>}
+        <Notification />
+
         <Header color={styles.color} content="Microblogging" as="h1" />
         <Header color={styles.color} icon>
           <Icon name="twitter" />
@@ -110,3 +102,13 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { login })(LoginPage);
+
+const styles = {
+  color: 'blue',
+  buttonLink: {
+    color: 'blue',
+    background: 'none',
+    padding: 0,
+    fontWeight: 100
+  }
+};

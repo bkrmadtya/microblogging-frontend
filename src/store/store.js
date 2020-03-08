@@ -1,14 +1,14 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
-import authReducer from "./reducers/authReducer";
-import errorReducer from "./reducers/errorReducer";
-import postReducer from "./reducers/postReducer";
-import commentReducer from "./reducers/commentReducer";
+import authReducer from './reducers/authReducer';
+import notificationReducer from './reducers/notificationReducer';
+import postReducer from './reducers/postReducer';
+import commentReducer from './reducers/commentReducer';
 
 const reducer = combineReducers({
   auth: authReducer,
-  error: errorReducer,
+  notification: notificationReducer,
   posts: postReducer,
   comments: commentReducer
 });

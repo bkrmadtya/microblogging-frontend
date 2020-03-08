@@ -7,8 +7,9 @@ import Nav from '../Nav';
 import Post from '../Post';
 import NewPostForm from '../NewPostForm';
 import SideNav from '../SideNav';
+import Notification from '../Notification';
 
-const Wall = ({ user, posts }) => {
+const Wall = ({ user, notification, posts }) => {
   const history = useHistory();
 
   const navigateTo = path => {
@@ -28,8 +29,8 @@ const Wall = ({ user, posts }) => {
   return (
     <>
       <Nav />
-
       <Container style={styles.container}>
+        <Notification />
         <Grid columns={2} stackable divided>
           <Grid.Row>
             <Grid.Column width={4}>
@@ -57,7 +58,8 @@ const Wall = ({ user, posts }) => {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    posts: state.posts
+    posts: state.posts,
+    notification: state.notification
   };
 };
 

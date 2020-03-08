@@ -12,8 +12,7 @@ import { getLocalSavedUser } from '../../services/LocalStorage';
 
 const initialState = {
   user: getLocalSavedUser(),
-  loading: false,
-  error: null
+  loading: false
 };
 
 const authReducer = (state = initialState, { type, payload }) => {
@@ -29,10 +28,10 @@ const authReducer = (state = initialState, { type, payload }) => {
     case LOGIN_FAIL:
     case SIGNUP_FAIL:
       // console.log('[AUTH FAIL]', payload);
-      return { ...state, error: payload, loading: false };
+      return { ...state, loading: false };
     case LOGOUT:
       // console.log('[LOGOUT]');
-      return { user: null, error: null, loading: false };
+      return { ...state, user: null };
     default:
       return state;
   }

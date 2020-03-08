@@ -1,10 +1,10 @@
-import { ADD_POST, SHARE_POST, INIT_POST } from './actionTypes';
+import { ADD_POST, SHARE_POST, INIT_POST, SUCCESS } from './actionTypes';
 
 import PostServices from '../../services/PostServices';
+import { setNotification } from './notificationAction';
 
 export const initPost = () => dispatch => {
   const initialPosts = PostServices.getAllPosts();
-  // console.log('INITIALIZING POST');
 
   dispatch({
     type: INIT_POST,
@@ -19,6 +19,10 @@ export const addPost = newPost => dispatch => {
     type: ADD_POST,
     payload: createdPost
   });
+
+  dispatch(
+    setNotification(`${createdPost.username} just created a new post`, SUCCESS)
+  );
 };
 
 export const sharePost = postToShare => dispatch => {
@@ -28,4 +32,7 @@ export const sharePost = postToShare => dispatch => {
     type: SHARE_POST,
     payload: sharedPost
   });
+  dispatch(
+    setNotification(`${sharedPost.username} just shared a post`, SUCCESS)
+  );
 };

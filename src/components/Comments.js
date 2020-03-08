@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Comment, Form, Header } from "semantic-ui-react";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Comment, Header } from 'semantic-ui-react';
 
 const SingleComment = ({ comment, imageSrc }) => {
   return (
@@ -12,7 +12,7 @@ const SingleComment = ({ comment, imageSrc }) => {
           <div>{comment.date}</div>
         </Comment.Metadata>
         <Comment.Text>
-          <pre style={{ fontFamily: "inherit", margin: 0 }}>
+          <pre style={{ fontFamily: 'inherit', margin: 0 }}>
             {comment.content}
           </pre>
         </Comment.Text>
@@ -26,7 +26,7 @@ const SingleComment = ({ comment, imageSrc }) => {
 
 const Comments = ({ comments, imageSrc }) => {
   return (
-    <Comment.Group style={{ margin: "auto", maxWidth: "inherit" }} threaded>
+    <Comment.Group style={{ margin: 'auto', maxWidth: 'inherit' }} threaded>
       <Header as="h4">Recent comments</Header>
 
       {comments.map(i => (
