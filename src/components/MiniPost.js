@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, Image, Button, Modal, Input, Header } from 'semantic-ui-react';
+import React from 'react';
+import { Card, Image } from 'semantic-ui-react';
 
 const MiniPost = ({ post, imageSrc }) => {
   return (
