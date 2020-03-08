@@ -9,14 +9,15 @@ import {
 } from '../actions/actionTypes';
 
 import AuthServices from '../../services/AuthServices';
+import { saveUserLocally } from '../../services/LocalStorage';
 
 export const login = user => dispatch => {
   dispatch({ type: LOGIN_INIT });
-  console.log(user);
 
   AuthServices.login(user)
     .then(result => {
-      console.log(result);
+      saveUserLocally(result);
+
       dispatch({
         type: LOGIN_SUCCESS,
         payload: result

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import LoginPage from './components/Pages/LoginPage';
 import SignupPage from './components/Pages/SignupPage';
-import Home from './components/Pages/Home';
 import Wall from './components/Pages/Wall';
 
 import { initPost } from './store/actions/postActions';

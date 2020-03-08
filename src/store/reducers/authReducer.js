@@ -8,8 +8,10 @@ import {
   SIGNUP_FAIL
 } from '../actions/actionTypes';
 
+import { getLocalSavedUser } from '../../services/LocalStorage';
+
 const initialState = {
-  user: null,
+  user: getLocalSavedUser(),
   loading: false,
   error: null
 };
