@@ -6,15 +6,17 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
   LOGOUT
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
-import AuthServices from "../../services/AuthServices";
+import AuthServices from '../../services/AuthServices';
 
 export const login = user => dispatch => {
   dispatch({ type: LOGIN_INIT });
+  console.log(user);
 
   AuthServices.login(user)
     .then(result => {
+      console.log(result);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: result
@@ -23,7 +25,7 @@ export const login = user => dispatch => {
     .catch(error => {
       dispatch({
         type: LOGIN_FAIL,
-        payload: error.response.data.error
+        payload: error.response.data.message
       });
     });
 };
@@ -41,7 +43,7 @@ export const signup = user => dispatch => {
     .catch(error => {
       dispatch({
         type: SIGNUP_FAIL,
-        payload: error.response.data.error
+        payload: error.response.data.message
       });
     });
 };

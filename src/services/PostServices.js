@@ -1,51 +1,46 @@
-import axios from "../config/axios";
-import uuid from "uuid/v1";
+import axios from '../config/axios';
+import uuid from 'uuid/v1';
 
 let posts = [
   {
-    id: 1,
-    content: "Life is a beautiful journey",
-    username: "Bikram Karki",
-    likes: 55,
-    comments: 55,
-    shares: 55,
+    id: '2',
+    content: 'Nice Quote',
+    username: 'Hima Ever',
+    likes: 0,
+    comments: 0,
+    shares: 0,
+    ownerId: 1,
+    originalPostId: '1',
+    creationDate: new Date().toUTCString()
+  },
+  {
+    id: '1',
+    content: 'Life is a beautiful journey',
+    username: 'Ural Moun',
+    likes: 12,
+    comments: 3,
+    shares: 1,
     ownerId: 1,
     originalPostId: null,
     creationDate: new Date().toUTCString()
   }
 ];
 
-let comments = [
-  {
-    id: 1,
-    owner: {
-      username: "Karki",
-      avatar: "asdf"
-    },
-    content: "This is my first comment to this post",
-    date: new Date().toUTCString(),
-    postId: 1,
-    commentParent: null
-  },
-  {
-    id: 2,
-    owner: {
-      username: "Hari",
-      avatar: "asdf"
-    },
-    content: "Nice post",
-    date: new Date().toUTCString(),
-    postId: 1,
-    commentParent: null
-  }
-];
-
 const getAllPosts = () => {
-  return posts;
+  return posts.map(i => {
+    if (i.originalPostId) {
+      i.originalPost = { ...getPostById(i.originalPostId) };
+    }
+    return i;
+  });
 };
 
 const getPostById = id => {
-  return posts.find(i => i.id === +id);
+  return posts.find(i => {
+    console.log(typeof i.id + ' : ' + i.id, typeof id + ' : ' + id);
+
+    return i.id === id;
+  });
 };
 
 const addNewPost = newPost => {
@@ -55,6 +50,8 @@ const addNewPost = newPost => {
   newPost.likes = 0;
   newPost.shares = 0;
   newPost.comments = 0;
+
+  posts = [newPost, ...posts];
   return newPost;
 };
 
@@ -64,6 +61,10 @@ const sharePost = sharedPost => {
   sharedPost.likes = 0;
   sharedPost.shares = 0;
   sharedPost.comments = 0;
+  sharedPost.originalPost = { ...getPostById(sharedPost.originalPostId) };
+
+  posts = [sharedPost, ...posts];
+
   return sharedPost;
 };
 
@@ -79,24 +80,9 @@ const updatePost = post => {
   });
 };
 
-const getCommentsByPostId = postId => {
-  const result = comments.filter(i => i.postId === postId);
-  return result;
-};
-
-const addComment = newComment => {
-  newComment.id = uuid();
-  newComment.date = new Date().toUTCString();
-  newComment.commentParent = null;
-
-  return newComment;
-};
-
 export default {
   getAllPosts,
   getPostById,
   addNewPost,
-  sharePost,
-  getCommentsByPostId,
-  addComment
+  sharePost
 };

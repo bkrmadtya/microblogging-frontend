@@ -1,12 +1,19 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import LoginPage from "./components/Pages/LoginPage";
-import SignupPage from "./components/Pages/SignupPage";
-import Home from "./components/Pages/Home";
-import Wall from "./components/Pages/Wall";
+import LoginPage from './components/Pages/LoginPage';
+import SignupPage from './components/Pages/SignupPage';
+import Home from './components/Pages/Home';
+import Wall from './components/Pages/Wall';
 
-function App() {
+import { initPost } from './store/actions/postActions';
+import { connect } from 'react-redux';
+
+function App({ initPost }) {
+  useEffect(() => {
+    initPost();
+  });
+
   return (
     <div>
       <Router>
@@ -19,4 +26,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { initPost })(App);

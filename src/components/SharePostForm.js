@@ -1,36 +1,59 @@
-import React from "react";
-import { Card, Image, Header, Modal, Input } from "semantic-ui-react";
+import React, { useState } from 'react';
+import { Button, Modal, Input, Header } from 'semantic-ui-react';
 
-const MiniPost = ({ post, imageSrc }) => {
-  return (
-    <Card fluid color="brown">
-      <Card.Content>
-        <Image circular bordered floated="left" size="mini" src={imageSrc} />
-        <Card.Header>{post.username}</Card.Header>
-        <Card.Meta>{post.creationDate}</Card.Meta>
-        <Card.Description>
-          <pre style={{ fontFamily: "inherit" }}>{post.content}</pre>
-        </Card.Description>
-      </Card.Content>
-    </Card>
-  );
-};
+import MiniPost from './MiniPost';
 
-const SharePostForm = ({ children, post, imageSrc }) => {
+import { sharePost } from '../store/actions/postActions';
+import { connect } from 'react-redux';
+
+const SharePostForm = ({
+  setOpenModal,
+  openModal,
+  post,
+  user,
+  imageSrc,
+  sharePost
+}) => {
+  const [content, setContent] = useState('');
+
+  const handleSharePost = () => {
+    const postToShare = {
+      content: content.trim(),
+      username: user.username,
+      originalPostId: post.id
+    };
+
+    setOpenModal(false);
+    sharePost(postToShare);
+  };
+
   return (
-    <Modal style={{}} trigger={children}>
-      <Modal.Header as="h4">Share the post</Modal.Header>
+    <Modal open={openModal}>
+      <Header as="h5">Share the post</Header>
       <Modal.Content>
         <Input
-          style={{ border: "none", color: "red" }}
+          transparent
           fluid
           placeholder="Write your thought about this post..."
+          value={content}
+          onChange={({ target }) => setContent(target.value)}
         />
         <MiniPost post={post} imageSrc={imageSrc} />
-        <Modal.Description></Modal.Description>
       </Modal.Content>
+
+      <Modal.Actions>
+        <Button
+          content="Post"
+          size="mini"
+          labelPosition="right"
+          icon="twitter"
+          primary
+          disabled={!content.trim()}
+          onClick={handleSharePost}
+        />
+      </Modal.Actions>
     </Modal>
   );
 };
 
-export default SharePostForm;
+export default connect(null, { sharePost })(SharePostForm);

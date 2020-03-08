@@ -8,14 +8,12 @@ import Post from '../Post';
 import NewPostForm from '../NewPostForm';
 import SideNav from '../SideNav';
 
-const styles = {
-  container: {
-    paddingTop: '70px'
-  }
-};
-
 const Wall = ({ user, posts }) => {
   const history = useHistory();
+
+  const navigateTo = path => {
+    history.push(path);
+  };
 
   useEffect(() => {
     if (!user) {
@@ -23,9 +21,13 @@ const Wall = ({ user, posts }) => {
     }
   });
 
-  const navigateTo = path => {
-    history.push(path);
-  };
+  useEffect(() => {
+    console.log('Post updated', posts);
+  }, [posts]);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <>
@@ -40,13 +42,13 @@ const Wall = ({ user, posts }) => {
               </Suspense>
             </Grid.Column>
             <Grid.Column width={12}>
-              <Header>Add a new post</Header>
+              <Header as="h5">Add a new post</Header>
 
               <NewPostForm user={user} />
 
-              <Header>Recent posts</Header>
+              <Header as="h5">Recent posts</Header>
               {posts.map(post => (
-                <Post key={post.id} post={post} />
+                <Post key={post.id} posts={post} />
               ))}
             </Grid.Column>
           </Grid.Row>
@@ -64,3 +66,9 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Wall);
+
+const styles = {
+  container: {
+    paddingTop: '70px'
+  }
+};
