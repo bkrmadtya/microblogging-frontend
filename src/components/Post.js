@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Card,
   Header,
@@ -7,15 +7,15 @@ import {
   Icon,
   Label,
   Transition
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import CommentForm from './CommentForm';
-import Comments from './Comments';
+import CommentForm from "./CommentForm";
+import Comments from "./Comments";
 
-import { getComments } from '../store/actions/commentActions';
-import { connect } from 'react-redux';
-import SharePostForm from './SharePostForm';
-import MiniPost from './MiniPost';
+import { getComments } from "../store/actions/commentActions";
+import { connect } from "react-redux";
+import SharePostForm from "./SharePostForm";
+import MiniPost from "./MiniPost";
 
 const Post = ({ posts, user, getComments }) => {
   const [post, setPost] = useState(posts);
@@ -27,7 +27,7 @@ const Post = ({ posts, user, getComments }) => {
   }, [posts, posts.shares]);
 
   const imageSrc = (() => {
-    const images = ['molly.png', 'steve.jpg', 'jenny.jpg', 'matthew.png'];
+    const images = ["molly.png", "steve.jpg", "jenny.jpg", "matthew.png"];
 
     const randomIndex = () => {
       return Math.round(Math.random() * 3);
@@ -39,21 +39,32 @@ const Post = ({ posts, user, getComments }) => {
   })();
 
   return (
-    <Card raised fluid color="blue">
+    <Card raised fluid>
       <Card.Content>
-        <Image
+        <Header as="h4" image>
+          <Image
+            textAlign="left"
+            circular
+            size="mini"
+            src={"https://react.semantic-ui.com/images/avatar/large/molly.png"}
+          />
+          <Header.Content>
+            {post.username}
+            <Header.Subheader>{post.creationDate}</Header.Subheader>
+          </Header.Content>
+        </Header>
+        {/* <Image
           circular
           bordered
           floated="left"
           size="mini"
-          src={'https://react.semantic-ui.com/images/avatar/large/molly.png'}
+          src={"https://react.semantic-ui.com/images/avatar/large/molly.png"}
         />
         <Card.Header>
           <Header as="h4">{post.username}</Header>
-        </Card.Header>
-        <Card.Meta>{post.creationDate}</Card.Meta>
+        </Card.Header> */}
         <Card.Description>
-          <pre style={{ fontFamily: 'inherit' }}>{post.content}</pre>
+          <pre style={{ fontFamily: "inherit" }}>{post.content}</pre>
         </Card.Description>
         {post.originalPost && <MiniPost post={post.originalPost} />}
       </Card.Content>
@@ -113,6 +124,6 @@ export default connect(mapStateToProps, { getComments })(Post);
 
 const styles = {
   button: {
-    background: 'none'
+    background: "none"
   }
 };

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Card, Image, Header, TextArea, Form } from 'semantic-ui-react';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Card, Image, Header, TextArea, Form } from "semantic-ui-react";
 
-import { addPost } from '../store/actions/postActions';
+import { addPost } from "../store/actions/postActions";
 
 const NewPostForm = ({ user, addPost }) => {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
 
   const imageSrc = (() => {
-    const images = ['molly.png', 'steve.jpg', 'jenny.jpg', 'matthew.png'];
+    const images = ["molly.png", "steve.jpg", "jenny.jpg", "matthew.png"];
 
     const randomIndex = () => {
       return Math.round(Math.random() * 3);
@@ -27,11 +27,11 @@ const NewPostForm = ({ user, addPost }) => {
 
     addPost(newPost);
 
-    setContent('');
+    setContent("");
   };
 
   return (
-    <Card fluid style={styles.card}>
+    <Card raised fluid style={styles.card}>
       <Card.Content>
         <Image circular bordered floated="left" size="mini" src={imageSrc} />
         <Card.Header>
@@ -68,9 +68,9 @@ export default connect(null, { addPost })(NewPostForm);
 
 const styles = {
   card: {
-    borderColor: 'blue'
+    borderColor: "blue"
   },
   button: {
-    background: 'none'
+    background: "none"
   }
 };

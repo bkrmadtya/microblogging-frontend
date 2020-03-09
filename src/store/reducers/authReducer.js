@@ -6,12 +6,12 @@ import {
   SIGNUP_INIT,
   SIGNUP_SUCCESS,
   SIGNUP_FAIL
-} from '../actions/actionTypes';
+} from "../actions/actionTypes";
 
-import { getLocalSavedUser } from '../../services/LocalStorage';
+import { getLocalSavedUser } from "../../services/LocalStorage";
 
 const initialState = {
-  user: getLocalSavedUser(),
+  user: getLocalSavedUser() || { username: "Bikram karki" },
   loading: false
 };
 

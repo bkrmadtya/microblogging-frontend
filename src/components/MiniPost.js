@@ -1,15 +1,25 @@
-import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import React from "react";
+import { Card, Header, Image } from "semantic-ui-react";
 
 const MiniPost = ({ post, imageSrc }) => {
   return (
-    <Card fluid color="brown">
+    <Card fluid color="green">
       <Card.Content>
-        <Image circular bordered floated="left" size="mini" src={imageSrc} />
-        <Card.Header>{post.username}</Card.Header>
-        <Card.Meta>{post.creationDate}</Card.Meta>
+        <Header style={{ textAlign: "left" }} as="h4" image>
+          <Image
+            circular
+            size="mini"
+            src={"https://react.semantic-ui.com/images/avatar/large/molly.png"}
+          />
+          <Header.Content>
+            {post.username}
+            <Header.Subheader>{post.creationDate}</Header.Subheader>
+          </Header.Content>
+        </Header>
+        {/* <Card.Header>{post.username}</Card.Header> */}
+        {/* <Card.Meta>{post.creationDate}</Card.Meta> */}
         <Card.Description>
-          <pre style={{ fontFamily: 'inherit' }}>{post.content}</pre>
+          <pre style={{ fontFamily: "inherit", margin: 0 }}>{post.content}</pre>
         </Card.Description>
       </Card.Content>
     </Card>

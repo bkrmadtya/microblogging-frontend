@@ -8,11 +8,11 @@ import {
   LOGOUT,
   SUCCESS,
   ERROR
-} from '../actions/actionTypes';
+} from "../actions/actionTypes";
 
-import AuthServices from '../../services/AuthServices';
-import { saveUserLocally } from '../../services/LocalStorage';
-import { setNotification } from './notificationAction';
+import AuthServices from "../../services/AuthServices";
+import { saveUserLocally } from "../../services/LocalStorage";
+import { setNotification } from "./notificationAction";
 
 export const login = user => dispatch => {
   dispatch({ type: LOGIN_INIT });
@@ -35,7 +35,9 @@ export const login = user => dispatch => {
         type: LOGIN_FAIL
       });
 
-      dispatch(setNotification(error.response.data.message, ERROR));
+      dispatch(
+        setNotification(error?.response?.data?.message || error.message, ERROR)
+      );
     });
 };
 
@@ -58,7 +60,9 @@ export const signup = user => dispatch => {
         type: SIGNUP_FAIL
       });
 
-      dispatch(setNotification(error.response.data.message, ERROR));
+      dispatch(
+        setNotification(error?.response?.data?.message || error.message, ERROR)
+      );
     });
 };
 
@@ -67,5 +71,5 @@ export const logout = username => dispatch => {
     type: LOGOUT
   });
 
-  dispatch(setNotification('Logout successful', SUCCESS));
+  dispatch(setNotification("Logout successful", SUCCESS));
 };
