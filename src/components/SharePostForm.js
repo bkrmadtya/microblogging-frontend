@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Button, Modal, Input, Header } from 'semantic-ui-react';
+import React, { useState } from "react";
+import { Button, Modal, Input, Header } from "semantic-ui-react";
 
-import MiniPost from './MiniPost';
+import MiniPost from "./MiniPost";
 
-import { sharePost } from '../store/actions/postActions';
-import { connect } from 'react-redux';
+import { sharePost } from "../store/actions/postActions";
+import { connect } from "react-redux";
 
 const SharePostForm = ({
   setOpenModal,
@@ -14,17 +14,17 @@ const SharePostForm = ({
   imageSrc,
   sharePost
 }) => {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
 
   const handleSharePost = () => {
     const postToShare = {
       content: content.trim(),
-      username: user.username,
-      originalPostId: post.id
+      owner: user.userId,
+      originalPost: post.postId
     };
 
     setOpenModal(false);
-    sharePost(postToShare);
+    sharePost(postToShare, user.username);
   };
 
   return (

@@ -1,52 +1,80 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { Label, Input, Menu } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+import { Menu, Image, Segment, Header, Icon } from "semantic-ui-react";
 
-const SideNav = ({ user }) => {
+import { logout } from "../store/actions/authActions";
+
+const SideNav = ({ user, logout }) => {
   const history = useHistory();
+  const location = useLocation();
 
   const navigateTo = path => {
-    history.push(path);
+    history.push(`${location.pathname}/${path}`);
   };
+
+  const imageSrc =
+    "https://react.semantic-ui.com/images/avatar/large/molly.png";
 
   return (
     <>
-      <Menu fluid inverted color="blue" size="small" vertical>
-        <Menu.Item as="h4" style={{ margin: 0 }}>
-          Welcome, <strong>{user.username}</strong>!
-        </Menu.Item>
-
+      <Menu fluid inverted color="violet" size="small" vertical>
+        {/* <Input icon="search" placeholder="Search anything..." /> */}
         <Menu.Item>
-          <Input icon="search" placeholder="Search anything..." />
+          <Segment textAlign="center" basic>
+            <Image
+              style={{ margin: "auto", border: "5px solid white" }}
+              size="small"
+              circular
+              bordered
+              src={imageSrc}
+            />
+            <Header inverted> {user.username}</Header>
+          </Segment>
         </Menu.Item>
 
-        <Menu.Item name="inbox">
-          <Label color="teal">1</Label>
-          Inbox
+        <Menu.Item
+          as="a"
+          name="profile"
+          onClick={() => {
+            navigateTo("profile");
+          }}
+        >
+          <Icon name="user" />
+          Profile
         </Menu.Item>
 
-        <Menu.Item name="sent">
-          <Label color="red">51</Label>
-          Sent
+        <Menu.Item
+          as="a"
+          name="setting"
+          onClick={() => {
+            navigateTo("setting");
+          }}
+        >
+          <Icon name="setting" />
+          Account Setting
         </Menu.Item>
 
-        <Menu.Item name="updates">
-          <Label color="teal">1</Label>
-          Updates
-        </Menu.Item>
-
-        <Menu.Item name="inbox">
-          <Label color="teal">1</Label>
-          Inbox
-        </Menu.Item>
-
-        <Menu.Item name="spam">
-          <Label color="teal">51</Label>
-          Spam
+        <Menu.Item
+          as="a"
+          name="logout"
+          onClick={() => {
+            history.push("/login");
+            logout();
+          }}
+        >
+          <Icon name="sign-out" />
+          Log out
         </Menu.Item>
       </Menu>
     </>
   );
 };
 
-export default SideNav;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+export default connect(mapStateToProps, { logout })(SideNav);

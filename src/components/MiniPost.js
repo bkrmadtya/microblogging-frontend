@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Header, Image } from "semantic-ui-react";
 
-const MiniPost = ({ post, imageSrc }) => {
+const MiniPost = ({ post }) => {
   return (
     <Card fluid color="green">
       <Card.Content>
@@ -13,7 +13,7 @@ const MiniPost = ({ post, imageSrc }) => {
           />
           <Header.Content>
             {post.username}
-            <Header.Subheader>{post.creationDate}</Header.Subheader>
+            <Header.Subheader>{post.postCreatedDate}</Header.Subheader>
           </Header.Content>
         </Header>
         {/* <Card.Header>{post.username}</Card.Header> */}

@@ -1,15 +1,15 @@
-import React, { useEffect, Suspense } from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { Container, Grid, Header } from 'semantic-ui-react';
+import React, { useEffect, Suspense } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Container, Grid, Header, Message } from "semantic-ui-react";
 
-import Nav from '../Nav';
-import Post from '../Post';
-import NewPostForm from '../NewPostForm';
-import SideNav from '../SideNav';
-import Notification from '../Notification';
+import Nav from "../Nav";
+import Post from "../Post";
+import NewPostForm from "../NewPostForm";
+import SideNav from "../SideNav";
+import Notification from "../Notification";
 
-const Wall = ({ user, notification, posts }) => {
+const Wall = ({ user, posts }) => {
   const history = useHistory();
 
   const navigateTo = path => {
@@ -18,7 +18,7 @@ const Wall = ({ user, notification, posts }) => {
 
   useEffect(() => {
     if (!user) {
-      navigateTo('/login');
+      navigateTo("/login");
     }
   });
 
@@ -34,9 +34,7 @@ const Wall = ({ user, notification, posts }) => {
         <Grid columns={2} stackable divided>
           <Grid.Row>
             <Grid.Column width={4}>
-              <Suspense fallback="loading">
-                <SideNav user={user} />
-              </Suspense>
+              <SideNav />
             </Grid.Column>
             <Grid.Column width={12}>
               <Header as="h5">Add a new post</Header>
@@ -44,9 +42,13 @@ const Wall = ({ user, notification, posts }) => {
               <NewPostForm user={user} />
 
               <Header as="h5">Recent posts</Header>
-              {posts.map(post => (
-                <Post key={post.id} posts={post} />
-              ))}
+              {posts.length ? (
+                <AllPosts posts={posts} />
+              ) : (
+                <Message style={{ textAlign: "center" }} info>
+                  No post yet, please create one
+                </Message>
+              )}
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -65,8 +67,18 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(Wall);
 
+const AllPosts = ({ posts }) => {
+  return (
+    <>
+      {posts.map(post => (
+        <Post key={post.postId} post={post} />
+      ))}
+    </>
+  );
+};
+
 const styles = {
   container: {
-    paddingTop: '70px'
+    paddingTop: "70px"
   }
 };

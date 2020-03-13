@@ -22,10 +22,10 @@ const NewPostForm = ({ user, addPost }) => {
   const handleAddPost = () => {
     const newPost = {
       content: content.trim(),
-      username: user.username
+      owner: user.userId
     };
 
-    addPost(newPost);
+    addPost(newPost, user.username);
 
     setContent("");
   };

@@ -1,38 +1,44 @@
-import { ADD_POST, SHARE_POST, INIT_POST, SUCCESS } from './actionTypes';
+import { ADD_POST, SHARE_POST, INIT_POST, SUCCESS, ERROR } from "./actionTypes";
 
-import PostServices from '../../services/PostServices';
-import { setNotification } from './notificationAction';
+import PostServices from "../../services/PostServices";
+import { setNotification } from "./notificationAction";
 
 export const initPost = () => dispatch => {
-  const initialPosts = PostServices.getAllPosts();
-
-  dispatch({
-    type: INIT_POST,
-    payload: initialPosts
-  });
+  PostServices.getAllPosts()
+    .then(result => {
+      dispatch({
+        type: INIT_POST,
+        payload: result
+      });
+    })
+    .catch(error => {
+      console.log(error);
+      dispatch(
+        setNotification(error?.response?.data?.message || error.message, ERROR)
+      );
+    });
 };
 
 export const addPost = newPost => dispatch => {
-  const createdPost = PostServices.addNewPost(newPost);
+  PostServices.addNewPost(newPost).then(result => {
+    dispatch({
+      type: ADD_POST,
+      payload: result
+    });
 
-  dispatch({
-    type: ADD_POST,
-    payload: createdPost
+    dispatch(
+      setNotification(`${result.username} just created a new post`, SUCCESS)
+    );
   });
-
-  dispatch(
-    setNotification(`${createdPost.username} just created a new post`, SUCCESS)
-  );
 };
 
 export const sharePost = postToShare => dispatch => {
-  const sharedPost = PostServices.sharePost(postToShare);
+  PostServices.sharePost(postToShare).then(result => {
+    dispatch({
+      type: SHARE_POST,
+      payload: result
+    });
 
-  dispatch({
-    type: SHARE_POST,
-    payload: sharedPost
+    dispatch(setNotification(`${result.username} just shared a post`, SUCCESS));
   });
-  dispatch(
-    setNotification(`${sharedPost.username} just shared a post`, SUCCESS)
-  );
 };

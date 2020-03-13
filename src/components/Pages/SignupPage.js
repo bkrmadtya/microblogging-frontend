@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   Button,
   Form,
@@ -9,16 +9,18 @@ import {
   Message,
   Segment,
   Icon
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import { signup } from '../../store/actions/authActions';
+import Notification from "../Notification";
+
+import { signup } from "../../store/actions/authActions";
 
 const styles = {
-  color: 'blue',
+  color: "blue",
 
   buttonLink: {
-    color: 'blue',
-    background: 'none',
+    color: "blue",
+    background: "none",
     padding: 0,
     fontWeight: 100
   }
@@ -33,7 +35,7 @@ const SignupPage = ({ auth, signup }) => {
 
   useEffect(() => {
     if (auth.user) {
-      navigateTo('/wall');
+      navigateTo(`/user/${auth.user.username}`);
     }
   });
 
@@ -51,9 +53,9 @@ const SignupPage = ({ auth, signup }) => {
   };
 
   return (
-    <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 500 }}>
-        {auth.error && <Message error>{auth.error}</Message>}
+        <Notification />
         <Header color={styles.color} content="Microblogging" as="h1" />
         <Header color={styles.color} icon>
           <Icon name="twitter" />
@@ -96,10 +98,10 @@ const SignupPage = ({ auth, signup }) => {
             </Button>
 
             <Message>
-              Already registered?{' '}
+              Already registered?{" "}
               <Button
                 style={styles.buttonLink}
-                onClick={() => navigateTo('/login')}
+                onClick={() => navigateTo("/login")}
               >
                 Log In
               </Button>

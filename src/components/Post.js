@@ -6,7 +6,8 @@ import {
   Button,
   Icon,
   Label,
-  Transition
+  Transition,
+  Divider
 } from "semantic-ui-react";
 
 import CommentForm from "./CommentForm";
@@ -17,14 +18,14 @@ import { connect } from "react-redux";
 import SharePostForm from "./SharePostForm";
 import MiniPost from "./MiniPost";
 
-const Post = ({ posts, user, getComments }) => {
-  const [post, setPost] = useState(posts);
+const Post = ({ post, user, getComments }) => {
+  const [thisPost, setThisPost] = useState(post);
   const [openComment, setOpenComment] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    setPost(posts);
-  }, [posts, posts.shares]);
+    setThisPost(post);
+  }, [post.numberOfPostShares]);
 
   const imageSrc = (() => {
     const images = ["molly.png", "steve.jpg", "jenny.jpg", "matthew.png"];
@@ -43,34 +44,27 @@ const Post = ({ posts, user, getComments }) => {
       <Card.Content>
         <Header as="h4" image>
           <Image
-            textAlign="left"
             circular
             size="mini"
             src={"https://react.semantic-ui.com/images/avatar/large/molly.png"}
           />
           <Header.Content>
-            {post.username}
-            <Header.Subheader>{post.creationDate}</Header.Subheader>
+            {thisPost.username}
+            <Header.Subheader>{thisPost.postCreatedDate}</Header.Subheader>
           </Header.Content>
         </Header>
-        {/* <Image
-          circular
-          bordered
-          floated="left"
-          size="mini"
-          src={"https://react.semantic-ui.com/images/avatar/large/molly.png"}
-        />
-        <Card.Header>
-          <Header as="h4">{post.username}</Header>
-        </Card.Header> */}
         <Card.Description>
-          <pre style={{ fontFamily: "inherit" }}>{post.content}</pre>
+          <pre style={{ fontFamily: "inherit", margin: 0 }}>
+            {thisPost.content}
+          </pre>
         </Card.Description>
-        {post.originalPost && <MiniPost post={post.originalPost} />}
+        {thisPost.originalPostDTO && (
+          <MiniPost post={thisPost.originalPostDTO} />
+        )}
       </Card.Content>
       <Card.Content style={{ padding: 0 }}>
         <Button style={styles.button}>
-          <Icon name="heart outline" color="red" /> {post.likes}
+          <Icon name="heart outline" color="red" /> {thisPost.numberOfPostLikes}
         </Button>
 
         <Button
@@ -79,7 +73,8 @@ const Post = ({ posts, user, getComments }) => {
             setOpenModal(true);
           }}
         >
-          <Icon name="share square outline" color="blue" /> {post.shares}
+          <Icon name="share square outline" color="blue" />{" "}
+          {thisPost.numberOfPostShares}
         </Button>
 
         <SharePostForm
@@ -94,11 +89,11 @@ const Post = ({ posts, user, getComments }) => {
           floated="right"
           style={styles.button}
           onClick={() => {
-            !openComment && getComments(post.id);
+            !openComment && getComments(thisPost.id);
             setOpenComment(!openComment);
           }}
         >
-          <Icon name="comment outline" color="blue" /> {post.comments}
+          <Icon name="comment outline" color="blue" /> {post.numberOfComments}
         </Button>
       </Card.Content>
 
@@ -106,6 +101,7 @@ const Post = ({ posts, user, getComments }) => {
         {openComment && (
           <Card.Content>
             <CommentForm post={post} />
+            <Divider />
             <Comments imageSrc={imageSrc} />
           </Card.Content>
         )}

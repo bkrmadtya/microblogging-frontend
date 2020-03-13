@@ -18,17 +18,14 @@ const Nav = ({ children, logout }) => {
         <Container>
           <Menu.Item
             onClick={() => {
-              logout();
-              navigateTo("/login");
+              navigateTo("/");
             }}
           >
             <Icon name="twitter" color="blue" />
             Microblogging
           </Menu.Item>
+
           {children}
-          <Menu.Item>
-            <Input icon="search" placeholder="Search people, posts, tags..." />
-          </Menu.Item>
 
           <Menu.Menu position="right">
             <Dropdown direction="left" icon="user" floating item>

@@ -4,7 +4,7 @@ const commentReducer = (state = [], { type, payload }) => {
   switch (type) {
     case GET_COMMENT:
       // console.log("[GETTING COMMENTS] : ", payload);
-      return [...payload];
+      return [...payload, ...state];
     case ADD_COMMENT:
       return [payload, ...state];
     default:
