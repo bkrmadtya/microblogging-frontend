@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useLocation, useHistory } from "react-router-dom";
 import {
   Container,
   Header,
@@ -16,6 +16,7 @@ import {
 import Nav from "../Nav";
 import Post from "../Post/Post";
 import Notification from "../Notification";
+import UserInfoBoard from "../UserInfoBoard";
 
 import { getUserByUsername } from "../../store/actions/userActions";
 import { getPostsByUsername } from "../../store/actions/postActions";
@@ -36,6 +37,8 @@ const Profile = ({
     getPostsByUsername(userToGet);
   }, []);
 
+  console.log(loggedInUser);
+
   useEffect(() => {
     if (!loggedInUser) {
       if (user?.username !== loggedInUser?.username && user?.private) {
@@ -45,64 +48,16 @@ const Profile = ({
   });
 
   if (!user) {
-    return null;
+    return <Segment loading></Segment>;
   }
-
-  const imageSrc =
-    "https://react.semantic-ui.com/images/avatar/large/molly.png";
-
   return (
     <>
       <Nav />
       <Container style={styles.container}>
         <Notification />
-        <Segment
-          style={styles.placeholder}
-          inverted
-          color="violet"
-          textAlign="center"
-        >
-          <Header style={styles.header} icon>
-            <Icon>
-              <Image
-                size="small"
-                circular
-                style={{ margin: "auto" }}
-                src={imageSrc}
-              />
-            </Icon>
-            {user.username}
-            <Header.Subheader style={{ color: "white" }}>
-              {user.email}
-            </Header.Subheader>
-            <Header.Subheader style={{ color: "white" }}>
-              <strong>Joined:</strong> <em>{user.creationDate}</em>
-            </Header.Subheader>
 
-            <Segment basic style={{ padding: 0, color: "white" }}>
-              <Header
-                style={{ color: "white", margin: "auto 20px" }}
-                as="h2"
-                floated="left"
-              >
-                {user.numberOfFollowers}
-                <Header.Subheader style={{ color: "white" }}>
-                  Followers
-                </Header.Subheader>
-              </Header>
-              <Header
-                style={{ color: "white", margin: "auto 20px" }}
-                as="h2"
-                floated="right"
-              >
-                {user.numberOfFollowing}
-                <Header.Subheader style={{ color: "white" }}>
-                  Followings
-                </Header.Subheader>
-              </Header>
-            </Segment>
-          </Header>
-        </Segment>
+        <UserInfoBoard user={user} />
+
         <Segment basic>
           <Header textAlign="center" as="h4" style={styles.header}>
             Activities

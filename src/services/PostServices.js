@@ -16,7 +16,7 @@ const getAllPostsByUsername = async username => {
 };
 
 const addNewPost = async newPost => {
-  newPost.creationDate = new Date().toUTCString();
+  newPost.creationDate = new Date().toISOString();
   const response = await axios.post("post/", newPost);
   const createdPost = response.data;
   // console.log(createdPost);

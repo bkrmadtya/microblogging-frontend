@@ -4,6 +4,8 @@ export const SUCCESS = "success";
 export const ERROR = "error";
 
 export const GET_USER_BY_USERNAME = "GET_USER_BY_USERNAME";
+export const UPDATE_USER_PRIVACY = "UPDATE_USER_PRIVACY";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
 export const LOGIN_INIT = "LOGIN_INIT";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

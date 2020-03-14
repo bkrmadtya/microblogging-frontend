@@ -8,8 +8,8 @@ import postReducer from "./reducers/postReducer";
 import commentReducer from "./reducers/commentReducer";
 
 const reducer = combineReducers({
-  auth: authReducer,
-  user: userReducer,
+  auth: authReducer, // logged in user
+  user: userReducer, // user of a specific profile
   notification: notificationReducer,
   posts: postReducer,
   comments: commentReducer

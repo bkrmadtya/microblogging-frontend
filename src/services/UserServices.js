@@ -6,6 +6,16 @@ const getUserByUsername = async username => {
   return user;
 };
 
+const updatePassword = async (passwordDetails, userId) => {
+  console.log(passwordDetails, userId);
+  const response = await axios.patch(`user/updatePassword?userId=${userId}`, {
+    ...passwordDetails
+  });
+  const res = await response.data;
+  return res;
+};
+
 export default {
-  getUserByUsername
+  getUserByUsername,
+  updatePassword
 };
