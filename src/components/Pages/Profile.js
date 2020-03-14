@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { connect } from "react-redux";
 import {
   Container,
   Header,
@@ -6,13 +8,31 @@ import {
   Form,
   Icon,
   Image,
-  Button
+  Button,
+  Divider,
+  Message
 } from "semantic-ui-react";
 
 import Nav from "../Nav";
+import Post from "../Post/Post";
 import Notification from "../Notification";
 
-const Profile = () => {
+import { getUserByUsername } from "../../store/actions/userActions";
+import { getPostsByUsername } from "../../store/actions/postActions";
+
+const Profile = ({ user, posts, getUserByUsername, getPostsByUsername }) => {
+  const location = useLocation();
+  const userToGet = location.pathname.slice(6);
+
+  useEffect(() => {
+    getUserByUsername(userToGet);
+    getPostsByUsername(userToGet);
+  }, []);
+
+  if (!user) {
+    return null;
+  }
+
   const imageSrc =
     "https://react.semantic-ui.com/images/avatar/large/molly.png";
 
@@ -21,32 +41,88 @@ const Profile = () => {
       <Nav />
       <Container style={styles.container}>
         <Notification />
-        <Segment basic style={styles.placeholder} textAlign="center">
-          <Header icon>
+        <Segment
+          style={styles.placeholder}
+          inverted
+          color="violet"
+          textAlign="center"
+        >
+          <Header style={styles.header} icon>
             <Icon>
-              <Image
-                size="small"
-                rounded
-                style={{ margin: "auto" }}
-                src={imageSrc}
-              />
+              <Image size="small" circular src={imageSrc} />
             </Icon>
-            Bikram Karki
-            <Header.Subheader>Joined date</Header.Subheader>
+            {user.username}
+            <Header.Subheader style={{ color: "white" }}>
+              {user.email}
+            </Header.Subheader>
+            <Header.Subheader style={{ color: "white" }}>
+              <strong>Joined:</strong> <em>{user.creationDate}</em>
+            </Header.Subheader>
+
+            <Segment basic style={{ padding: 0, color: "white" }}>
+              <Header style={{ color: "white" }} as="h5" floated="left">
+                {user.numberOfFollowers}
+                <Header.Subheader style={{ color: "white" }}>
+                  Followers
+                </Header.Subheader>
+              </Header>
+              <Header style={{ color: "white" }} as="h5" floated="right">
+                {user.numberOfFollowing}
+                <Header.Subheader style={{ color: "white" }}>
+                  Followings
+                </Header.Subheader>
+              </Header>
+            </Segment>
           </Header>
         </Segment>
+        <Segment basic>
+          <Header textAlign="center" as="h4" style={styles.header}>
+            Activities
+          </Header>
+        </Segment>
+        {posts.length ? (
+          <AllPosts posts={posts} />
+        ) : (
+          <Message style={{ textAlign: "center" }} info>
+            {user.username} has not posted anything yet!
+          </Message>
+        )}
       </Container>
     </>
   );
 };
 
-export default Profile;
+const AllPosts = ({ posts }) => {
+  return (
+    <>
+      {posts.map(post => (
+        <Post key={post.postId} post={post} />
+      ))}
+    </>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.auth.user,
+    user: state.user,
+    posts: state.posts.userPosts
+  };
+};
+
+export default connect(mapStateToProps, {
+  getUserByUsername,
+  getPostsByUsername
+})(Profile);
 
 const styles = {
   container: {
     paddingTop: "70px"
   },
   placeholder: {
-    padding: "30px 0"
+    padding: "20px 0"
+  },
+  header: {
+    margin: 0
   }
 };

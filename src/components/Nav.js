@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Icon, Input, Menu, Dropdown, Container } from "semantic-ui-react";
 
 import { logout } from "../store/actions/authActions";
 
-const Nav = ({ children, logout }) => {
+const Nav = ({ user, children, logout }) => {
   const history = useHistory();
+  // const location = useLocation();
 
   const navigateTo = path => {
     history.push(path);
@@ -32,16 +33,15 @@ const Nav = ({ children, logout }) => {
               <Dropdown.Menu>
                 <Dropdown.Item
                   onClick={() => {
-                    logout();
-                    navigateTo("/login");
+                    // navigateTo("/profile");
                   }}
                 >
                   User profile
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => {
-                    logout();
-                    navigateTo("/login");
+                    // logout();
+                    // navigateTo("/setting");
                   }}
                 >
                   Setting
@@ -49,7 +49,7 @@ const Nav = ({ children, logout }) => {
                 <Dropdown.Item
                   onClick={() => {
                     logout();
-                    navigateTo("/login");
+                    history.push("/login");
                   }}
                 >
                   Logout
@@ -63,4 +63,10 @@ const Nav = ({ children, logout }) => {
   );
 };
 
-export default connect(null, { logout })(Nav);
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+export default connect(mapStateToProps, { logout })(Nav);

@@ -2,24 +2,16 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Card, Image, Header, TextArea, Form } from "semantic-ui-react";
 
-import { addPost } from "../store/actions/postActions";
+import { addPost } from "../../store/actions/postActions";
 
 const NewPostForm = ({ user, addPost }) => {
   const [content, setContent] = useState("");
 
-  const imageSrc = (() => {
-    const images = ["molly.png", "steve.jpg", "jenny.jpg", "matthew.png"];
-
-    const randomIndex = () => {
-      return Math.round(Math.random() * 3);
-    };
-
-    return `https://react.semantic-ui.com/images/avatar/large/${
-      images[randomIndex()]
-    }`;
-  })();
+  const imageSrc =
+    "https://react.semantic-ui.com/images/avatar/large/molly.png";
 
   const handleAddPost = () => {
+    console.log(user);
     const newPost = {
       content: content.trim(),
       owner: user.userId

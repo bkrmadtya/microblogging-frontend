@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   Button,
   Form,
@@ -9,11 +9,11 @@ import {
   Icon,
   Message,
   Segment
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
-import Notification from '../Notification';
+import Notification from "../Notification";
 
-import { login } from '../../store/actions/authActions';
+import { login } from "../../store/actions/authActions";
 
 const LoginPage = ({ auth, login }) => {
   const history = useHistory();
@@ -24,7 +24,7 @@ const LoginPage = ({ auth, login }) => {
 
   useEffect(() => {
     if (auth.user) {
-      navigateTo(`/user/${auth.user.username}`);
+      navigateTo("/");
     }
   });
 
@@ -36,7 +36,7 @@ const LoginPage = ({ auth, login }) => {
   };
 
   return (
-    <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Notification />
 
@@ -80,10 +80,10 @@ const LoginPage = ({ auth, login }) => {
             </Button>
 
             <Message>
-              New to us?{' '}
+              New to us?{" "}
               <Button
                 style={styles.buttonLink}
-                onClick={() => navigateTo('/signup')}
+                onClick={() => navigateTo("/signup")}
               >
                 Sign Up
               </Button>
@@ -104,10 +104,10 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { login })(LoginPage);
 
 const styles = {
-  color: 'blue',
+  color: "blue",
   buttonLink: {
-    color: 'blue',
-    background: 'none',
+    color: "blue",
+    background: "none",
     padding: 0,
     fontWeight: 100
   }

@@ -11,7 +11,7 @@ import {
 import { getLocalSavedUser } from "../../services/LocalStorage";
 
 const initialState = {
-  user: getLocalSavedUser() || { username: "Bikram karki" },
+  user: getLocalSavedUser(),
   loading: false
 };
 

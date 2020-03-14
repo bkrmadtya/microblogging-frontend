@@ -35,7 +35,7 @@ const SignupPage = ({ auth, signup }) => {
 
   useEffect(() => {
     if (auth.user) {
-      navigateTo(`/user/${auth.user.username}`);
+      navigateTo("/");
     }
   });
 

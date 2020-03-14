@@ -3,7 +3,7 @@ import { Button, Modal, Input, Header } from "semantic-ui-react";
 
 import MiniPost from "./MiniPost";
 
-import { sharePost } from "../store/actions/postActions";
+import { sharePost } from "../../store/actions/postActions";
 import { connect } from "react-redux";
 
 const SharePostForm = ({

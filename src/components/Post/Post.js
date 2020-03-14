@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   Card,
   Header,
@@ -10,10 +11,10 @@ import {
   Divider
 } from "semantic-ui-react";
 
-import CommentForm from "./CommentForm";
-import Comments from "./Comments";
+import CommentForm from "../CommentForm";
+import Comments from "../Comments";
 
-import { getComments } from "../store/actions/commentActions";
+import { getComments } from "../../store/actions/commentActions";
 import { connect } from "react-redux";
 import SharePostForm from "./SharePostForm";
 import MiniPost from "./MiniPost";
@@ -22,6 +23,10 @@ const Post = ({ post, user, getComments }) => {
   const [thisPost, setThisPost] = useState(post);
   const [openComment, setOpenComment] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [liked, setLiked] = useState(false);
+
+  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     setThisPost(post);
@@ -42,7 +47,16 @@ const Post = ({ post, user, getComments }) => {
   return (
     <Card raised fluid>
       <Card.Content>
-        <Header as="h4" image>
+        <Header
+          as="a"
+          image
+          onClick={() => {
+            const path = location.pathname.includes("user")
+              ? `${thisPost.username}`
+              : `user/${thisPost.username}`;
+            history.push(path);
+          }}
+        >
           <Image
             circular
             size="mini"
@@ -63,8 +77,18 @@ const Post = ({ post, user, getComments }) => {
         )}
       </Card.Content>
       <Card.Content style={{ padding: 0 }}>
-        <Button style={styles.button}>
-          <Icon name="heart outline" color="red" /> {thisPost.numberOfPostLikes}
+        <Button
+          style={styles.button}
+          onClick={async () => {
+            await setLiked(!liked);
+            const likedPost = { ...thisPost };
+            likedPost.numberOfPostLikes = !liked ? 1 : 0;
+
+            setThisPost(likedPost);
+          }}
+        >
+          <Icon name={!liked ? "heart outline" : "heart"} color="red" />{" "}
+          {thisPost.numberOfPostLikes}
         </Button>
 
         <Button

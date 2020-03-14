@@ -1,12 +1,11 @@
 import axios from "../config/axios";
 
-const getAllUser = async () => {
-  const response = await axios.get("/");
-  const users = await response.data;
-  console.log(users);
-  return users;
+const getUserByUsername = async username => {
+  const response = await axios.get(`user/${username}`);
+  const user = await response.data;
+  return user;
 };
 
 export default {
-  getAllUser
+  getUserByUsername
 };

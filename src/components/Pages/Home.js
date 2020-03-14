@@ -1,142 +1,71 @@
-import React, { useRef } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Menu, Sticky, Input, Segment, Container } from "semantic-ui-react";
+import { Container, Grid, Header, Message, Divider } from "semantic-ui-react";
 
 import Nav from "../Nav";
+import Post from "../Post/Post";
+import NewPostForm from "../Post/NewPostForm";
+import SideNav from "../SideNav";
+import Notification from "../Notification";
 
-const Home = () => {
-  const history = useHistory();
-  const contextRef = useRef();
-
-  const navigateTo = path => {
-    history.push(path);
-  };
-
+const Home = ({ loggedInUser, posts }) => {
   return (
     <>
-      <div ref={contextRef}>
-        <Sticky context={contextRef}>
-          <Nav>
-            <Menu.Item name="home" onClick={() => navigateTo("/login")} />
-            <Menu.Item name="messages" onClick={() => navigateTo("/login")} />
-            <Menu.Item name="friends" onClick={() => navigateTo("/login")} />
-          </Nav>
-        </Sticky>
+      <Nav />
+      <Container style={styles.container}>
+        <Notification />
+        <Grid columns={2} stackable divided>
+          <Grid.Row>
+            <Grid.Column width={4}>
+              <SideNav />
+            </Grid.Column>
+            <Grid.Column width={12}>
+              {loggedInUser && (
+                <>
+                  <Header as="h3">Add a new post</Header>
+                  <NewPostForm user={loggedInUser} />
+                </>
+              )}
 
-        <Container attached="bottom">
-          <Segment>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Consequatur inventore, et excepturi dignissimos voluptatibus odio
-            quos, iste natus saepe velit soluta accusantium sint est? Facere
-            sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum! Lorem,
-            ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            inventore, et excepturi dignissimos voluptatibus odio quos, iste
-            natus saepe velit soluta accusantium sint est? Facere sint non odio
-            temporibus cum! Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur inventore, et excepturi dignissimos voluptatibus
-            odio quos, iste natus saepe velit soluta accusantium sint est?
-            Facere sint non odio temporibus cum! Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Consequatur inventore, et excepturi
-            dignissimos voluptatibus odio quos, iste natus saepe velit soluta
-            accusantium sint est? Facere sint non odio temporibus cum!
-          </Segment>
-        </Container>
-      </div>
+              <Header as="h3">Recent posts</Header>
+              <Divider />
+              {posts.length ? (
+                <AllPosts posts={posts} />
+              ) : (
+                <Message style={{ textAlign: "center" }} info>
+                  No post yet, please create one
+                </Message>
+              )}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     </>
   );
 };
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    loggedInUser: state.auth.user,
+    posts: state.posts.publicPosts
+  };
+};
+
+export default connect(mapStateToProps)(Home);
+
+const AllPosts = ({ posts }) => {
+  return (
+    <>
+      {posts.map(post => (
+        <Post key={post.postId} post={post} />
+      ))}
+    </>
+  );
+};
+
+const styles = {
+  container: {
+    paddingTop: "70px"
+  }
+};
