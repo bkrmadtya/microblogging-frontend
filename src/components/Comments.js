@@ -1,30 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Comment, Header, Message } from "semantic-ui-react";
 
-const SingleComment = ({ comment, imageSrc }) => {
-  return (
-    <Comment>
-      <Comment.Avatar src={imageSrc} />
-      <Comment.Content>
-        <Comment.Author as="a">{comment.owner.username}</Comment.Author>
-        <Comment.Metadata>
-          <div>{comment.date}</div>
-        </Comment.Metadata>
-        <Comment.Text>
-          <pre style={{ fontFamily: "inherit", margin: 0 }}>
-            {comment.content}
-          </pre>
-        </Comment.Text>
-        {/* <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions> */}
-      </Comment.Content>
-    </Comment>
-  );
-};
+const Comments = ({ postId, loggedInUser, allComments, imageSrc }) => {
+  const comments = allComments[postId]?.comments || [];
 
-const Comments = ({ comments, imageSrc }) => {
   if (comments.length === 0) {
     return (
       <Message style={{ textAlign: "center" }} info>
@@ -38,7 +18,12 @@ const Comments = ({ comments, imageSrc }) => {
       <Header as="h4">Recent comments</Header>
 
       {comments.map(i => (
-        <SingleComment key={i.id} comment={i} imageSrc={imageSrc} />
+        <SingleComment
+          key={i.id}
+          user={loggedInUser}
+          comment={i}
+          imageSrc={imageSrc}
+        />
       ))}
     </Comment.Group>
   );
@@ -46,8 +31,33 @@ const Comments = ({ comments, imageSrc }) => {
 
 const mapStateToProps = state => {
   return {
-    comments: state.comments
+    allComments: state.comments,
+    loggedInUser: state.auth.user
   };
 };
 
 export default connect(mapStateToProps)(Comments);
+
+const SingleComment = ({ user, comment, imageSrc }) => {
+  const username = comment?.userOwnerUsername || user.username;
+
+  return (
+    <Comment>
+      <Comment.Avatar src={imageSrc} />
+      <Comment.Content>
+        <Comment.Author as="a">{username}</Comment.Author>
+        <Comment.Metadata>
+          <div>{comment.creationDate}</div>
+        </Comment.Metadata>
+        <Comment.Text>
+          <pre style={{ fontFamily: "inherit", margin: 0 }}>
+            {comment.content}
+          </pre>
+        </Comment.Text>
+        {/* <Comment.Actions>
+          <Comment.Action>Reply</Comment.Action>
+        </Comment.Actions> */}
+      </Comment.Content>
+    </Comment>
+  );
+};

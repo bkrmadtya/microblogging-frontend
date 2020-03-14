@@ -113,7 +113,7 @@ const Post = ({ post, user, getComments }) => {
           floated="right"
           style={styles.button}
           onClick={() => {
-            !openComment && getComments(thisPost.id);
+            !openComment && getComments(thisPost.postId);
             setOpenComment(!openComment);
           }}
         >
@@ -126,7 +126,7 @@ const Post = ({ post, user, getComments }) => {
           <Card.Content>
             <CommentForm post={post} />
             <Divider />
-            <Comments imageSrc={imageSrc} />
+            <Comments postId={post.postId} imageSrc={imageSrc} />
           </Card.Content>
         )}
       </Transition.Group>

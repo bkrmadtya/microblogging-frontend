@@ -10,8 +10,8 @@ const CommentForm = ({ user, addComment, post }) => {
   const handleAddComment = () => {
     const newComment = {
       content,
-      owner: user,
-      postId: post.id
+      userOwnerId: user.userId,
+      postId: post.postId
     };
     addComment(newComment);
     setContent("");

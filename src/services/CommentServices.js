@@ -1,42 +1,18 @@
 import axios from "../config/axios";
-import uuid from "uuid/v1";
 
-let comments = [
-  {
-    id: 1,
-    owner: {
-      username: "Karki",
-      avatar: "asdf"
-    },
-    content: "This is my first comment to this post",
-    date: new Date().toUTCString(),
-    postId: 1,
-    commentParent: null
-  },
-  {
-    id: 2,
-    owner: {
-      username: "Hari",
-      avatar: "asdf"
-    },
-    content: "Nice post",
-    date: new Date().toUTCString(),
-    postId: 1,
-    commentParent: null
-  }
-];
-
-const getCommentsByPostId = postId => {
-  const result = comments.filter(i => i.postId === postId);
-  return result;
+const getCommentsByPostId = async postId => {
+  const response = await axios.get(`post/${postId}/comment`);
+  const comments = await response.data;
+  return comments;
 };
 
-const addComment = newComment => {
-  newComment.id = uuid();
-  newComment.date = new Date().toUTCString();
-  newComment.commentParent = null;
+const addComment = async newComment => {
+  const response = await axios.post("comment", newComment);
+  const createdComment = await response.data;
 
-  return newComment;
+  console.log(createdComment);
+
+  return createdComment;
 };
 
 export default {

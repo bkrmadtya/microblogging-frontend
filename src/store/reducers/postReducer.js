@@ -14,7 +14,7 @@ const initialPosts = {
 const postReducer = (state = initialPosts, { type, payload }) => {
   switch (type) {
     case INIT_POST:
-      // console.log("[INIT POST] : ", payload);
+      console.log("[INIT POST] : ", payload);
       return { ...state, publicPosts: [...payload] };
     case GET_POST_BY_USERNAME:
       console.log("[GET POST BY USERNAME] : ", payload);
@@ -52,9 +52,8 @@ const postReducer = (state = initialPosts, { type, payload }) => {
     case COMMENT_POST: // Increases no of comments
       const getCommentedPosts = key => {
         return [
-          payload,
           ...state[key].map(post => {
-            if (post.postId === payload.originalPostDTO.postID) {
+            if (post.postId === payload.id) {
               return {
                 ...post,
                 numberOfComments: post.numberOfComments + 1

@@ -58,7 +58,7 @@ const AllPosts = ({ posts }) => {
   return (
     <>
       {posts.map(post => (
-        <Post key={post.postId} post={post} />
+        <Post key={post.postId + post.content} post={post} />
       ))}
     </>
   );
