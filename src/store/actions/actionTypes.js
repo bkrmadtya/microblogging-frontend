@@ -17,6 +17,9 @@ export const SIGNUP_FAIL = "SIGNUP_FAIL";
 
 export const LOGOUT = "LOGOUT";
 
+export const LIKE_POST = "LIKE_POST";
+export const LIKE_COMMENT = "LIKE_COMMENT";
+
 export const INIT_POST = "INIT_POST";
 export const GET_POST_BY_USERNAME = "GET_POST_BY_USERNAME";
 export const ADD_POST = "ADD_POST";

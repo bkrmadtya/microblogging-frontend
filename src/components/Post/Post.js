@@ -44,6 +44,8 @@ const Post = ({ post, user, getComments }) => {
     }`;
   })();
 
+  console.log(user);
+
   return (
     <Card raised fluid>
       <Card.Content>
@@ -113,7 +115,7 @@ const Post = ({ post, user, getComments }) => {
           floated="right"
           style={styles.button}
           onClick={() => {
-            !openComment && getComments(thisPost.postId);
+            !openComment && getComments(thisPost.postId, user.userId);
             setOpenComment(!openComment);
           }}
         >

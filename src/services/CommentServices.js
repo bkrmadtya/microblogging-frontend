@@ -1,7 +1,9 @@
 import axios from "../config/axios";
 
-const getCommentsByPostId = async postId => {
-  const response = await axios.get(`post/${postId}/comment`);
+const getCommentsByPostId = async (postId, userId) => {
+  const response = await axios.get(
+    `post/${postId}/comment?requestedUserId=${userId}`
+  );
   const comments = await response.data;
   return comments;
 };

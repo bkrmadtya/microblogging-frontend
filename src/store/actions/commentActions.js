@@ -2,8 +2,8 @@ import { GET_COMMENT, ADD_COMMENT, COMMENT_POST } from "../actions/actionTypes";
 
 import CommentServices from "../../services/CommentServices";
 
-export const getComments = postId => dispatch => {
-  CommentServices.getCommentsByPostId(postId)
+export const getComments = (postId, userId) => dispatch => {
+  CommentServices.getCommentsByPostId(postId, userId || 0)
     .then(result => {
       const comments = {};
       comments[result[0].postId] = { comments: [...result] };

@@ -50,7 +50,7 @@ const AccountSetting = ({ user, updatePassword }) => {
       <Container style={styles.container}>
         <Notification />
 
-        {/* <UserInfoBoard user={loggedInUser} />
+        {/* <UserInfoBoard user={user} />
 
         <Message warning={profileIsPrivate} success={!profileIsPrivate}>
           Profile status: <strong> {privacyStatus}</strong>
@@ -80,7 +80,7 @@ const AccountSetting = ({ user, updatePassword }) => {
           <Form.Input
             name="oldPass2"
             value={oldPass2}
-            label="Repeat Password"
+            label="Repeat Old Password"
             onChange={e => {
               setOldPass2(e.target.value);
             }}
