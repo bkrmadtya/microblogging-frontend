@@ -37,8 +37,10 @@ const Profile = ({
   }, []);
 
   useEffect(() => {
-    if (user?.username !== loggedInUser?.username && user?.private) {
-      history.push("/notfound");
+    if (!loggedInUser) {
+      if (user?.username !== loggedInUser?.username && user?.private) {
+        history.push("/notfound");
+      }
     }
   });
 
@@ -62,7 +64,12 @@ const Profile = ({
         >
           <Header style={styles.header} icon>
             <Icon>
-              <Image size="small" circular src={imageSrc} />
+              <Image
+                size="small"
+                circular
+                style={{ margin: "auto" }}
+                src={imageSrc}
+              />
             </Icon>
             {user.username}
             <Header.Subheader style={{ color: "white" }}>
@@ -73,13 +80,21 @@ const Profile = ({
             </Header.Subheader>
 
             <Segment basic style={{ padding: 0, color: "white" }}>
-              <Header style={{ color: "white" }} as="h5" floated="left">
+              <Header
+                style={{ color: "white", margin: "auto 20px" }}
+                as="h2"
+                floated="left"
+              >
                 {user.numberOfFollowers}
                 <Header.Subheader style={{ color: "white" }}>
                   Followers
                 </Header.Subheader>
               </Header>
-              <Header style={{ color: "white" }} as="h5" floated="right">
+              <Header
+                style={{ color: "white", margin: "auto 20px" }}
+                as="h2"
+                floated="right"
+              >
                 {user.numberOfFollowing}
                 <Header.Subheader style={{ color: "white" }}>
                   Followings
