@@ -9,6 +9,7 @@ import AccountSetting from "./components/Pages/AccountSetting";
 
 import { initPost } from "./store/actions/postActions";
 import { connect } from "react-redux";
+import NotFound from "./components/Pages/NotFound";
 
 function App({ user, initPost }) {
   useEffect(() => {
@@ -26,6 +27,7 @@ function App({ user, initPost }) {
           exact
           component={AccountSetting}
         />
+        <Route path="/notfound" exact component={NotFound} />
         <Route path="/" exact component={Home} />
       </Router>
     </div>

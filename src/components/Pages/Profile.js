@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Container,
@@ -20,7 +20,14 @@ import Notification from "../Notification";
 import { getUserByUsername } from "../../store/actions/userActions";
 import { getPostsByUsername } from "../../store/actions/postActions";
 
-const Profile = ({ user, posts, getUserByUsername, getPostsByUsername }) => {
+const Profile = ({
+  user,
+  loggedInUser,
+  posts,
+  getUserByUsername,
+  getPostsByUsername
+}) => {
+  const history = useHistory();
   const location = useLocation();
   const userToGet = location.pathname.slice(6);
 
@@ -28,6 +35,12 @@ const Profile = ({ user, posts, getUserByUsername, getPostsByUsername }) => {
     getUserByUsername(userToGet);
     getPostsByUsername(userToGet);
   }, []);
+
+  useEffect(() => {
+    if (user?.username !== loggedInUser?.username && user?.private) {
+      history.push("/notfound");
+    }
+  });
 
   if (!user) {
     return null;
