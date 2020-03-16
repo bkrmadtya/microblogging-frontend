@@ -6,7 +6,7 @@ const commentReducer = (state = {}, { type, payload }) => {
       console.log("[GETTING COMMENTS] : ", payload);
       return { ...state, ...payload };
     case ADD_COMMENT:
-      const commentedPost = state[payload.postId] || {};
+      const commentedPost = state[payload.postId] || { comments: [] };
       commentedPost.comments = [payload, ...commentedPost.comments];
       console.log(commentedPost);
       return { ...state, [payload.postId]: { ...commentedPost } };

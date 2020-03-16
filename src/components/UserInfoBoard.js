@@ -1,6 +1,8 @@
 import React from "react";
 import { Segment, Label, Icon, Image, Header } from "semantic-ui-react";
 
+import ImageUploader from "./utils/Image Uploader/ImageUploader";
+
 const UserInfoBoard = ({ user }) => {
   const imageSrc =
     "https://react.semantic-ui.com/images/avatar/large/molly.png";
@@ -21,6 +23,7 @@ const UserInfoBoard = ({ user }) => {
               style={{ margin: "auto", border: "10px solid white" }}
               src={imageSrc}
             />
+            {/* <ImageUploader placeholder={} type="Logo" aspectRatio={4 / 4}></ImageUploader> */}
           </Icon>
           {user.username}
           <Header.Subheader style={{ color: "white" }}>

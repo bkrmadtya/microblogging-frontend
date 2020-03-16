@@ -33,6 +33,8 @@ const sharePost = async postToShare => {
   return sharedPost;
 };
 
+const likePost = async postId => {};
+
 export default {
   getAllPublicPosts,
   getAllPostsByUsername,

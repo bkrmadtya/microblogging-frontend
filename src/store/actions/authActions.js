@@ -42,14 +42,15 @@ export const login = user => dispatch => {
 };
 
 export const signup = user => dispatch => {
-  saveUserLocally(user);
   dispatch({ type: SIGNUP_INIT });
 
   AuthServices.signup(user)
     .then(result => {
+      saveUserLocally(result);
+
       dispatch({
         type: SIGNUP_SUCCESS,
-        payload: user
+        payload: result
       });
 
       dispatch(
