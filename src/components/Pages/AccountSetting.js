@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import {
   Container,
   Header,
@@ -9,22 +9,25 @@ import {
   Icon,
   Image,
   Button
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-import Nav from "../Nav";
-import Notification from "../Notification";
-import UserInfoBoard from "../UserInfoBoard";
+import Nav from '../Nav';
+import Notification from '../Notification';
+import UserInfoBoard from '../UserInfoBoard';
 
-import { updatePassword } from "../../store/actions/userActions";
+import { updatePassword, updatePrivacy } from '../../store/actions/userActions';
 
-const AccountSetting = ({ user, updatePassword }) => {
-  const [oldPass1, setOldPass1] = useState("");
-  const [oldPass2, setOldPass2] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+const AccountSetting = ({ user, updatePassword, updatePrivacy }) => {
+  const [oldPass1, setOldPass1] = useState('');
+  const [oldPass2, setOldPass2] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
-  const [profileIsPrivate, setProfileIsPrivate] = useState(user.private);
-  const privacyStatus = profileIsPrivate ? "Private" : "Public";
-  const alterPrivacyStatus = !profileIsPrivate ? "Private" : "Public";
+  const profileIsPrivate = user.private;
+
+  const privacyStatus = profileIsPrivate ? 'Private' : 'Public';
+  const alterPrivacyStatus = !profileIsPrivate ? 'Private' : 'Public';
+
+  console.log(user);
 
   const oldPasswordMatches =
     oldPass1.trim() === oldPass2.trim() &&
@@ -37,12 +40,16 @@ const AccountSetting = ({ user, updatePassword }) => {
     e.preventDefault();
     updatePassword({ oldPassword: oldPass1, newPassword }, user.userId);
 
-    setOldPass1("");
-    setOldPass2("");
-    setNewPassword("");
+    setOldPass1('');
+    setOldPass2('');
+    setNewPassword('');
   };
 
-  console.log(oldPasswordMatches);
+  const accentColor = profileIsPrivate ? 'red' : 'green';
+
+  const handleUpdatePrivacy = user => {
+    updatePrivacy(user);
+  };
 
   return (
     <>
@@ -50,20 +57,21 @@ const AccountSetting = ({ user, updatePassword }) => {
       <Container style={styles.container}>
         <Notification />
 
-        {/* <UserInfoBoard user={user} />
+        <UserInfoBoard user={user} color={accentColor} />
 
-        <Message warning={profileIsPrivate} success={!profileIsPrivate}>
+        <Message color={accentColor}>
           Profile status: <strong> {privacyStatus}</strong>
         </Message>
 
         <Checkbox
           checked={profileIsPrivate}
           onChange={(e, data) => {
-            setProfileIsPrivate(data.checked);
+            // setProfileIsPrivate(data.checked);
+            handleUpdatePrivacy(user);
           }}
           toggle
           label={`Make profile ${alterPrivacyStatus}`}
-        /> */}
+        />
 
         <Header>Account Settings</Header>
 
@@ -115,13 +123,15 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { updatePassword })(AccountSetting);
+export default connect(mapStateToProps, { updatePassword, updatePrivacy })(
+  AccountSetting
+);
 
 const styles = {
   container: {
-    paddingTop: "70px"
+    paddingTop: '70px'
   },
   placeholder: {
-    padding: "30px 0"
+    padding: '30px 0'
   }
 };

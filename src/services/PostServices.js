@@ -1,4 +1,4 @@
-import axios from "../config/axios";
+import axios from '../config/axios';
 
 const getAllPublicPosts = async () => {
   const response = await axios.get(`post/allPublic`);
@@ -17,7 +17,7 @@ const getAllPostsByUsername = async username => {
 
 const addNewPost = async newPost => {
   newPost.creationDate = new Date().toISOString();
-  const response = await axios.post("post/", newPost);
+  const response = await axios.post('post/', newPost);
   const createdPost = response.data;
   // console.log(createdPost);
 
@@ -26,7 +26,7 @@ const addNewPost = async newPost => {
 
 const sharePost = async postToShare => {
   postToShare.creationDate = new Date().toUTCString();
-  const response = await axios.post("post/share", postToShare);
+  const response = await axios.post('post/share', postToShare);
   const sharedPost = response.data;
   console.log(sharedPost);
 

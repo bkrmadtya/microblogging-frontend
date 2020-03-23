@@ -5,10 +5,11 @@ import {
   LOGOUT,
   SIGNUP_INIT,
   SIGNUP_SUCCESS,
-  SIGNUP_FAIL
-} from "../actions/actionTypes";
+  SIGNUP_FAIL,
+  UPDATE_USER_PRIVACY
+} from '../actions/actionTypes';
 
-import { getLocalSavedUser } from "../../services/LocalStorage";
+import { getLocalSavedUser } from '../../services/LocalStorage';
 
 const initialState = {
   user: getLocalSavedUser() || null,
@@ -23,7 +24,7 @@ const authReducer = (state = initialState, { type, payload }) => {
       return { ...state, loading: true };
     case LOGIN_SUCCESS:
     case SIGNUP_SUCCESS:
-      console.log("[AUTH SUCCESS]", payload);
+      console.log('[AUTH SUCCESS]', payload);
       return { ...state, user: payload, loading: false };
     case LOGIN_FAIL:
     case SIGNUP_FAIL:
@@ -32,6 +33,8 @@ const authReducer = (state = initialState, { type, payload }) => {
     case LOGOUT:
       // console.log('[LOGOUT]');
       return { ...state, user: null };
+    case UPDATE_USER_PRIVACY:
+      return { ...state, user: payload };
     default:
       return state;
   }

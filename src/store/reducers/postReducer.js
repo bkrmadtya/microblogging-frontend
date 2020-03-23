@@ -4,7 +4,7 @@ import {
   INIT_POST,
   SHARE_POST,
   COMMENT_POST
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
 const initialPosts = {
   publicPosts: [],
@@ -14,10 +14,10 @@ const initialPosts = {
 const postReducer = (state = initialPosts, { type, payload }) => {
   switch (type) {
     case INIT_POST:
-      console.log("[INIT POST] : ", payload);
+      // console.log("[INIT POST] : ", payload);
       return { ...state, publicPosts: [...payload] };
     case GET_POST_BY_USERNAME:
-      console.log("[GET POST BY USERNAME] : ", payload);
+      // console.log("[GET POST BY USERNAME] : ", payload);
       return { ...state, userPosts: [...payload] };
     case ADD_POST:
       // console.log("[NEW POST] : ", payload);
@@ -45,8 +45,8 @@ const postReducer = (state = initialPosts, { type, payload }) => {
 
       return {
         ...state,
-        publicPosts: getSharedPosts("publicPosts"),
-        userPosts: getSharedPosts("userPosts")
+        publicPosts: getSharedPosts('publicPosts'),
+        userPosts: getSharedPosts('userPosts')
       };
 
     case COMMENT_POST: // Increases no of comments
@@ -66,8 +66,8 @@ const postReducer = (state = initialPosts, { type, payload }) => {
 
       return {
         ...state,
-        publicPosts: getCommentedPosts("publicPosts"),
-        userPosts: getCommentedPosts("userPosts")
+        publicPosts: getCommentedPosts('publicPosts'),
+        userPosts: getCommentedPosts('userPosts')
       };
     default:
       return state;

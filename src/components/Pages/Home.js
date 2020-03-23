@@ -1,13 +1,13 @@
-import React from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { Container, Grid, Header, Message, Divider } from "semantic-ui-react";
+import React from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { Container, Grid, Header, Message, Divider } from 'semantic-ui-react';
 
-import Nav from "../Nav";
-import Post from "../Post/Post";
-import NewPostForm from "../Post/NewPostForm";
-import SideNav from "../SideNav";
-import Notification from "../Notification";
+import Nav from '../Nav';
+import Post from '../Post/Post';
+import NewPostForm from '../Post/NewPostForm';
+import SideNav from '../SideNav';
+import Notification from '../Notification';
 
 const Home = ({ loggedInUser, posts }) => {
   return (
@@ -33,7 +33,7 @@ const Home = ({ loggedInUser, posts }) => {
               {posts.length ? (
                 <AllPosts posts={posts} />
               ) : (
-                <Message style={{ textAlign: "center" }} info>
+                <Message style={{ textAlign: 'center' }} info>
                   No post yet, please create one
                 </Message>
               )}
@@ -66,6 +66,6 @@ const AllPosts = ({ posts }) => {
 
 const styles = {
   container: {
-    paddingTop: "70px"
+    paddingTop: '70px'
   }
 };

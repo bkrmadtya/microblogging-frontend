@@ -8,11 +8,11 @@ import {
   LOGOUT,
   SUCCESS,
   ERROR
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
-import AuthServices from "../../services/AuthServices";
-import { saveUserLocally, clearLocalData } from "../../services/LocalStorage";
-import { setNotification } from "./notificationAction";
+import AuthServices from '../../services/AuthServices';
+import { saveUserLocally, clearLocalData } from '../../services/LocalStorage';
+import { setNotification } from './notificationAction';
 
 export const login = user => dispatch => {
   dispatch({ type: LOGIN_INIT });
@@ -75,5 +75,5 @@ export const logout = () => dispatch => {
     type: LOGOUT
   });
 
-  dispatch(setNotification("Logout successful", SUCCESS));
+  dispatch(setNotification('Logout successful', SUCCESS));
 };

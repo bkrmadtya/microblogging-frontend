@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -11,15 +11,15 @@ import {
   Button,
   Divider,
   Message
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-import Nav from "../Nav";
-import Post from "../Post/Post";
-import Notification from "../Notification";
-import UserInfoBoard from "../UserInfoBoard";
+import Nav from '../Nav';
+import Post from '../Post/Post';
+import Notification from '../Notification';
+import UserInfoBoard from '../UserInfoBoard';
 
-import { getUserByUsername } from "../../store/actions/userActions";
-import { getPostsByUsername } from "../../store/actions/postActions";
+import { getUserByUsername } from '../../store/actions/userActions';
+import { getPostsByUsername } from '../../store/actions/postActions';
 
 const Profile = ({
   user,
@@ -35,14 +35,14 @@ const Profile = ({
   useEffect(() => {
     getUserByUsername(userToGet);
     getPostsByUsername(userToGet);
-  }, []);
+  }, [getPostsByUsername, getUserByUsername, userToGet]);
 
-  console.log(loggedInUser);
+  // console.log(loggedInUser);
 
   useEffect(() => {
     if (!loggedInUser) {
       if (user?.username !== loggedInUser?.username && user?.private) {
-        history.push("/notfound");
+        history.push('/notfound');
       }
     }
   });
@@ -66,7 +66,7 @@ const Profile = ({
         {posts.length ? (
           <AllPosts posts={posts} />
         ) : (
-          <Message style={{ textAlign: "center" }} info>
+          <Message style={{ textAlign: 'center' }} info>
             {user.username} has not posted anything yet!
           </Message>
         )}
@@ -100,10 +100,10 @@ export default connect(mapStateToProps, {
 
 const styles = {
   container: {
-    paddingTop: "70px"
+    paddingTop: '70px'
   },
   placeholder: {
-    padding: "20px 0"
+    padding: '20px 0'
   },
   header: {
     margin: 0

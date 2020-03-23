@@ -5,10 +5,10 @@ import {
   INIT_POST,
   SUCCESS,
   ERROR
-} from "./actionTypes";
+} from './actionTypes';
 
-import PostServices from "../../services/PostServices";
-import { setNotification } from "./notificationAction";
+import PostServices from '../../services/PostServices';
+import { setNotification } from './notificationAction';
 
 export const initPost = () => dispatch => {
   PostServices.getAllPublicPosts()
@@ -19,7 +19,6 @@ export const initPost = () => dispatch => {
       });
     })
     .catch(error => {
-      console.log(error);
       dispatch(
         setNotification(error?.response?.data?.message || error.message, ERROR)
       );
@@ -39,7 +38,6 @@ export const getPostsByUsername = username => dispatch => {
 };
 
 export const addPost = newPost => dispatch => {
-  console.log(newPost);
   PostServices.addNewPost(newPost)
     .then(result => {
       dispatch({

@@ -1,4 +1,4 @@
-import axios from "../config/axios";
+import axios from '../config/axios';
 
 const getUserByUsername = async username => {
   const response = await axios.get(`user/${username}`);
@@ -15,7 +15,16 @@ const updatePassword = async (passwordDetails, userId) => {
   return res;
 };
 
+const updatePrivacy = async user => {
+  const response = await axios.patch(`user/updateIsPrivate/${!user.private}`, {
+    userId: user.userId
+  });
+  const res = await response.data;
+  return res;
+};
+
 export default {
   getUserByUsername,
-  updatePassword
+  updatePassword,
+  updatePrivacy
 };

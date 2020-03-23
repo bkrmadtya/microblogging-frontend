@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   Card,
   Header,
@@ -9,15 +9,15 @@ import {
   Label,
   Transition,
   Divider
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-import CommentForm from "../CommentForm";
-import Comments from "../Comments";
+import CommentForm from '../CommentForm';
+import Comments from '../Comments';
 
-import { getComments } from "../../store/actions/commentActions";
-import { connect } from "react-redux";
-import SharePostForm from "./SharePostForm";
-import MiniPost from "./MiniPost";
+import { getComments } from '../../store/actions/commentActions';
+import { connect } from 'react-redux';
+import SharePostForm from './SharePostForm';
+import MiniPost from './MiniPost';
 
 const Post = ({ post, user, getComments }) => {
   const [thisPost, setThisPost] = useState(post);
@@ -30,10 +30,10 @@ const Post = ({ post, user, getComments }) => {
 
   useEffect(() => {
     setThisPost(post);
-  }, [post.numberOfPostShares]);
+  }, [post, post.numberOfPostShares]);
 
   const imageSrc = (() => {
-    const images = ["molly.png", "steve.jpg", "jenny.jpg", "matthew.png"];
+    const images = ['molly.png', 'steve.jpg', 'jenny.jpg', 'matthew.png'];
 
     const randomIndex = () => {
       return Math.round(Math.random() * 3);
@@ -44,8 +44,6 @@ const Post = ({ post, user, getComments }) => {
     }`;
   })();
 
-  console.log(user);
-
   return (
     <Card raised fluid>
       <Card.Content>
@@ -53,7 +51,7 @@ const Post = ({ post, user, getComments }) => {
           as="a"
           image
           onClick={() => {
-            const path = location.pathname.includes("user")
+            const path = location.pathname.includes('user')
               ? `${thisPost.username}`
               : `user/${thisPost.username}`;
             history.push(path);
@@ -62,7 +60,7 @@ const Post = ({ post, user, getComments }) => {
           <Image
             circular
             size="mini"
-            src={"https://react.semantic-ui.com/images/avatar/large/molly.png"}
+            src={'https://react.semantic-ui.com/images/avatar/large/molly.png'}
           />
           <Header.Content>
             {thisPost.username}
@@ -70,7 +68,7 @@ const Post = ({ post, user, getComments }) => {
           </Header.Content>
         </Header>
         <Card.Description>
-          <pre style={{ fontFamily: "inherit", margin: 0 }}>
+          <pre style={{ fontFamily: 'inherit', margin: 0 }}>
             {thisPost.content}
           </pre>
         </Card.Description>
@@ -89,7 +87,7 @@ const Post = ({ post, user, getComments }) => {
             setThisPost(likedPost);
           }}
         >
-          <Icon name={!liked ? "heart outline" : "heart"} color="red" />{" "}
+          <Icon name={!liked ? 'heart outline' : 'heart'} color="red" />{' '}
           {thisPost.numberOfPostLikes}
         </Button>
 
@@ -99,7 +97,7 @@ const Post = ({ post, user, getComments }) => {
             setOpenModal(true);
           }}
         >
-          <Icon name="share square outline" color="blue" />{" "}
+          <Icon name="share square outline" color="blue" />{' '}
           {thisPost.numberOfPostShares}
         </Button>
 
@@ -146,6 +144,6 @@ export default connect(mapStateToProps, { getComments })(Post);
 
 const styles = {
   button: {
-    background: "none"
+    background: 'none'
   }
 };
