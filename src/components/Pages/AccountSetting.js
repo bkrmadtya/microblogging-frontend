@@ -6,6 +6,7 @@ import {
   Message,
   Checkbox,
   Form,
+  Segment,
   Icon,
   Image,
   Button
@@ -13,13 +14,13 @@ import {
 
 import Nav from '../Nav';
 import Notification from '../Notification';
-import UserInfoBoard from '../UserInfoBoard';
+import UserBar from '../UserBar';
 
 import { updatePassword, updatePrivacy } from '../../store/actions/userActions';
 
 const AccountSetting = ({ user, updatePassword, updatePrivacy }) => {
   const [oldPass1, setOldPass1] = useState('');
-  const [oldPass2, setOldPass2] = useState('');
+  const [newPassword1, setNewPassword1] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
   const profileIsPrivate = user.private;
@@ -29,19 +30,19 @@ const AccountSetting = ({ user, updatePassword, updatePrivacy }) => {
 
   console.log(user);
 
-  const oldPasswordMatches =
-    oldPass1.trim() === oldPass2.trim() &&
-    oldPass1.length > 0 &&
-    oldPass2.length > 0;
+  const newPasswordMatches =
+    newPassword1.trim() === newPassword.trim() &&
+    newPassword1.length > 0 &&
+    newPassword.length > 0;
 
-  const buttonDisabled = oldPasswordMatches && newPassword.length !== 0;
+  const buttonDisabled = newPasswordMatches && newPassword.length !== 0;
 
   const handleUpdatePassword = e => {
     e.preventDefault();
     updatePassword({ oldPassword: oldPass1, newPassword }, user.userId);
 
     setOldPass1('');
-    setOldPass2('');
+    setNewPassword1('');
     setNewPassword('');
   };
 
@@ -57,61 +58,68 @@ const AccountSetting = ({ user, updatePassword, updatePrivacy }) => {
       <Container style={styles.container}>
         <Notification />
 
-        <UserInfoBoard user={user} color={accentColor} />
+        <UserBar user={user} privacyStatus={privacyStatus} />
 
-        <Message color={accentColor}>
-          Profile status: <strong> {privacyStatus}</strong>
-        </Message>
+        <Header textAlign="center" as="h2">
+          Account settings
+        </Header>
 
-        <Checkbox
-          checked={profileIsPrivate}
-          onChange={(e, data) => {
-            // setProfileIsPrivate(data.checked);
-            handleUpdatePrivacy(user);
-          }}
-          toggle
-          label={`Make profile ${alterPrivacyStatus}`}
-        />
+        <Segment attached secondary color={accentColor} clearing>
+          <Header as="h4" floated="left" style={{ margin: 0 }}>
+            Update Privacy
+          </Header>
 
-        <Header>Account Settings</Header>
+          <Segment floated="right" style={{ margin: 0, padding: 0 }} basic>
+            <Checkbox
+              checked={profileIsPrivate}
+              color={accentColor}
+              onChange={(e, data) => {
+                handleUpdatePrivacy(user);
+              }}
+              slider
+              label={`Make profile ${alterPrivacyStatus}`}
+            />
+          </Segment>
+        </Segment>
 
-        <Form>
-          <Form.Input
-            name="oldPass1"
-            value={oldPass1}
-            label="Old Password"
-            onChange={e => {
-              setOldPass1(e.target.value);
-            }}
-            error={!oldPasswordMatches && oldPass1.trim().length > 0}
-          />
-          <Form.Input
-            name="oldPass2"
-            value={oldPass2}
-            label="Repeat Old Password"
-            onChange={e => {
-              setOldPass2(e.target.value);
-            }}
-            error={!oldPasswordMatches && oldPass2.trim().length > 0}
-          />
-          <Form.Input
-            name="newPassword"
-            value={newPassword}
-            label="New Password"
-            onChange={e => {
-              setNewPassword(e.target.value);
-            }}
-          />
-          <Button
-            primary
-            disabled={!buttonDisabled}
-            onClick={handleUpdatePassword}
-          >
-            Update password
-          </Button>
-        </Form>
-
-        <Form></Form>
+        <Segment attached="bottom" secondary>
+          <Header as="h4">Update Password</Header>
+          <Form size="small">
+            <Form.Input
+              name="oldPass1"
+              value={oldPass1}
+              label="Old Password"
+              onChange={e => {
+                setOldPass1(e.target.value);
+              }}
+            />
+            <Form.Input
+              name="newPassword1"
+              value={newPassword}
+              label="New Password"
+              onChange={e => {
+                setNewPassword(e.target.value);
+              }}
+            />
+            <Form.Input
+              name="newPassword"
+              value={newPassword1}
+              label="Repeat New Password"
+              onChange={e => {
+                setNewPassword1(e.target.value);
+              }}
+              error={!newPasswordMatches && newPassword1.trim().length > 0}
+            />
+            <Button
+              primary
+              disabled={!buttonDisabled}
+              onClick={handleUpdatePassword}
+              size="tiny"
+            >
+              Update password
+            </Button>
+          </Form>
+        </Segment>
       </Container>
     </>
   );
@@ -130,8 +138,5 @@ export default connect(mapStateToProps, { updatePassword, updatePrivacy })(
 const styles = {
   container: {
     paddingTop: '70px'
-  },
-  placeholder: {
-    padding: '30px 0'
   }
 };

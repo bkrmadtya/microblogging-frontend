@@ -17,10 +17,10 @@ const Home = ({ loggedInUser, posts }) => {
         <Notification />
         <Grid columns={2} stackable divided>
           <Grid.Row>
-            <Grid.Column width={4}>
+            <Grid.Column width={5}>
               <SideNav />
             </Grid.Column>
-            <Grid.Column width={12}>
+            <Grid.Column width={11}>
               {loggedInUser && (
                 <>
                   <Header as="h3">Add a new post</Header>
